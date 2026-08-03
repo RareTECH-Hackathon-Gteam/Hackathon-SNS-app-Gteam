@@ -2,5 +2,11 @@
     box-sizing: border-box;
 }
 
+body {
+    margin: 0 !important;
+    font-family: 'Gudea', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background-color: #F4F7FB;
+}
+
 
 /* ログイン画面 */
