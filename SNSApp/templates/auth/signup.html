@@ -10,7 +10,7 @@
 <h2>プロフィールを入力しましょう</h2>
 
 <form class="auth-form" method="post">
-    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <!-- <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"> -->
     
     <div class="form-group">    
         <label>ユーザー名</label>
@@ -30,12 +30,13 @@
     <div class="form-group">
         <label>再パスワード</label>
         <input type="password" name="confirm_password" />
+        
+        <button class="auth-button" type="submit">登録</button>
+        
+        <a class="switch-auth-mode" href="{{ url_for('login_view') }}">
+            ログインはこちら
+        </a>
+    </div>
 </form>
-
-    <button class="auth-button" type="submit">登録</button>
-    
-    <a class="switch-auth-mode" href="{{ url_for('login_view') }}">
-        ログインはこちら
-    </a>
-
+        
 {% endblock %}

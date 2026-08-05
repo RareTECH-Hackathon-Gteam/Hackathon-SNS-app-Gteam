@@ -8,16 +8,13 @@
 {% block content %}
 <div class="auth-wrapper">
     <!-- アイコン画像 -->
-     <!-- 直接ブラウザでファイルを開いて確認する場合の一時的な記述 -->
-    <img src="../../static/images/manaLinkIcon.png" alt="mana-Linkアイコン画像" class="auth-logo">
-    
-    <!-- <img src="{{ url_for('static', filename='images/manaLinkIcon.png') }}" alt="mana-Linkアイコン画像" class="auth-logo"> -->
+    <img src="{{ url_for('static', filename='images/manaLinkIcon.png') }}" alt="mana-Linkアイコン画像" class="auth-logo">
     
     <h1>mana-Link</h1>
     <h2>一言だから、続けられる</h2>
 
     <form class="auth-form" method="post">
-        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <!-- <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"> -->
        
         <div class="form-group">
             <label>メールアドレス</label>
@@ -28,12 +25,13 @@
             <label>パスワード</label>
             <input type="password" name="password" />
         </div>
-
-        <button class="auth-button" type="submit">ログイン</button>
-        
-        <a class="switch-auth-mode" href="{{ url_for('signup_view') }}">
-            新規登録はこちら
-        </a>
+        <div class="auth-button-container">
+            <button class="auth-button" type="submit">ログイン</button>
+            
+            <a class="switch-auth-mode" href="{{ url_for('signup_view') }}">
+                新規登録はこちら
+            </a>
+        </div>
     </form>
 </div>
 
