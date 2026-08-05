@@ -8,5 +8,8 @@ body {
     background-color: #F4F7FB;
 }
 
-
-/* ログイン画面 */
+.auth-wrapper {
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+}
