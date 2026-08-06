@@ -1,42 +1,47 @@
 {% extends "base.html" %}
 
-{% block title %}ログイン - SNS App{% endblock %}
+{% block title %}新規登録 - SNS App{% endblock %}
 {% block page_css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
 {% endblock %}
 
 {% block content %}
 
-<h2>プロフィールを入力しましょう</h2>
+<div class="page-auth">
+    <h1>新規登録</h1>
+    <h2>プロフィールを入力しましょう</h2>
 
-<form class="auth-form" method="post">
-    <!-- <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"> -->
-    
-    <div class="form-group">    
-        <label>ユーザー名</label>
-        <input type="text" name="username" /> 
-    </div>
-
-    <div class="form-group">
-        <label>メールアドレス</label>
-        <input type="email" name="email" />
-    </div>
-
-    <div class="form-group">
-        <label>パスワード</label>
-        <input type="password" name="password" />
-    </div>
-
-    <div class="form-group">
-        <label>再パスワード</label>
-        <input type="password" name="confirm_password" />
+    <form class="auth-form" method="post">
+        <!-- <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"> -->
         
-        <button class="auth-button" type="submit">登録</button>
-        
-        <a class="switch-auth-mode" href="{{ url_for('login_view') }}">
-            ログインはこちら
-        </a>
-    </div>
-</form>
-        
+        <div class="form-group">
+            <label class="form-label">ユーザー名</label>
+            <input type="text" name="username" /> 
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">メールアドレス</label>
+            <input type="email" name="email" />
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">パスワード</label>
+            <input type="password" name="password" />
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">再パスワード</label>
+            <input type="password" name="confirm_password" />
+        </div>
+
+        <div class="auth-button-container">
+            <button class="auth-button" type="submit">登録</button>
+            
+            <a class="switch-auth-mode" href="{{ url_for('login_view') }}">
+                ログインはこちら
+            </a>
+        </div>
+    </form>
+</div>
+
 {% endblock %}

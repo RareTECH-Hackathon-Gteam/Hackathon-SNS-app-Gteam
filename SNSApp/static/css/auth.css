@@ -7,7 +7,7 @@ a {
     text-decoration: none;
 }
 
-/* === auth-form === */
+/* === login.html === */
 
 .auth-wrapper {
     width: 402px;
@@ -61,10 +61,18 @@ label, .form-group {
     flex-direction: column;
     align-items: center;
     gap: 15px;
+    letter-spacing: 0.8px;
+    font-size: 18px;
+    margin-top: 20px;
+}
+
+.auth-button-container > a {
+    margin-top: 8px;
 }
 
 input[type="email"], 
-input[type="password"] {
+input[type="password"], 
+input[type="text"] {
     box-sizing: border-box;
     width: 237px;
     padding: 14px 16px;
@@ -86,6 +94,7 @@ input[type="submit"] {
     border: none;
     border-radius: 30px;
     cursor: pointer;
+    letter-spacing: 1px;
 }
 
 button {
@@ -94,4 +103,33 @@ button {
 
 .switch-auth-mode {
     color: #6BA4F7;
+}
+
+/* === signup.html === */
+
+.page-auth {
+    width: 402px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.page-auth > h1 {
+    font-weight: normal;
+    margin-top: 80px;
+    font-size: 32px;
+}
+
+.page-auth > h2 {
+    font-size: 16px;
+    font-weight: normal;
+    margin-bottom: 30px;
+    margin-top: 10px;
+}
+
+.form-label {
+    text-align: left;
+    width: 237px;
+    margin: 0 auto;
+    padding-left: 30px;
+    padding-bottom: 3px;
 }
