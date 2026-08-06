@@ -15,9 +15,9 @@ csrf = CSRFProtect(app)
 def create_post():
     user_id = session.get('user_id')
     if user_id is None:
-        return redirect(url_for('login_view'))    ###login_view(ログインページの表示)を後日作成
-    content = request.form.get('content', '').strip()
-    if content == '':
+        return redirect(url_for('login_view'))    ###login_view(ログイン画面の表示)を後日作成
+    contents = request.form.get('content', '').strip()
+    if contents == '':
         flash ('投稿内容が空です', 'error')
         return redirect(url_for('posts_view'))    ###posts_view(タイムラインの表示)を後日作成
     Post.create(user_id, contents)
