@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}新規登録 - SNS App{% endblock %}
+{% block page_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<!-- ヘッダー -->
+<div class="auth-wrapper">
+    <header class="post-header">
+        <div class="header-inner">
+            <a href="{{ url_for('posts_view') }}" class="logo">mana-Link</a>
+            
+            <a href="{{ url_for('posts_view') }}" class="cancel-button">キャンセル</a>
+
+        </div>
+    </header>
+
+    <!-- 投稿フォーム -->
+    <section class="new-post-container">
+        <form class="new-post-form" action="/posts" method="post">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <textarea name="content" placeholder="今日の勉強を共有しよう！"></textarea>
+            <div class="new-post-footer">
+                <button class="btn-primary" type="submit">
+                    投稿作成
+                </button>
+            </div>
+        </form>
+    </section>
+ </div>
+ {% endblock %}
