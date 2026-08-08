@@ -11,6 +11,18 @@
     <h1>新規登録</h1>
     <h2>プロフィールを入力しましょう</h2>
 
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div class="flash-messages">
+        {% for category, message in messages %}
+        <div class="flash flash-{{ category }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+
     <form class="auth-form" method="post">
         <!-- <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"> -->
         
