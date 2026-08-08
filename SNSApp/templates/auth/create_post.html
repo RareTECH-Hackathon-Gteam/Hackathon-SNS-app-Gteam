@@ -22,6 +22,19 @@
     <section class="new-post-container">
         <form class="new-post-form" action="/posts" method="post">
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+            {% with messages = get_flased_messges(with_categories=true) %}
+            {% if messages %}
+            <div class="flash-messages">
+                {% for category, message in messages %}
+                <div class="flash flash-{{ category }}">
+                    {{ message }}
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+            {% endwith %}
+
             <textarea name="content" placeholder="今日の勉強を共有しよう！"></textarea>
             <div class="new-post-footer">
                 <button class="btn-primary" type="submit">
