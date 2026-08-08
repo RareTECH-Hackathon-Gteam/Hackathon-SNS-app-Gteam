@@ -23,7 +23,8 @@
         <form class="new-post-form" action="/posts" method="post">
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 
-            {% with messages = get_flased_messges(with_categories=true) %}
+            <!-- エラーメッセージ表示 -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
             <div class="flash-messages">
                 {% for category, message in messages %}

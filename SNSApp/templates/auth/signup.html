@@ -11,6 +11,7 @@
     <h1>新規登録</h1>
     <h2>プロフィールを入力しましょう</h2>
 
+    <!-- エラーメッセージ表示 -->
     {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
     <div class="flash-messages">
@@ -24,7 +25,7 @@
     {% endwith %}
 
     <form class="auth-form" method="post">
-        <!-- <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"> -->
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
         
         <div class="form-group">
             <label class="form-label">ユーザー名</label>

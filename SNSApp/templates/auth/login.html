@@ -21,6 +21,7 @@
             <input type="email" name="email" />
         </div>
 
+        <!-- エラーメッセージ表示 -->
         {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
         <div class="flash-messages">
@@ -32,6 +33,7 @@
         </div>
         {% endif %}
         {% endwith%}
+
         <div class="form-group">
             <label>パスワード</label>
             <input type="password" name="password" />
