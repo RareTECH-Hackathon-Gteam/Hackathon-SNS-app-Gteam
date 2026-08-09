@@ -7,6 +7,16 @@ a {
     text-decoration: none;
 }
 
+.logo {
+    text-decoration: none;
+    color: inherit;
+    transition: opacity 0.3s ease;
+}
+
+.logo:hover {
+    opacity: 0.6;
+}
+
 /* === login.html === */
 
 .auth-wrapper {
@@ -69,6 +79,14 @@ label, .form-group {
     margin-top: 20px;
 }
 
+.auth-button:hover{
+    color: #6BA4F7;
+    background-color: #ffffff;
+    border: 2px solid #6BA4F7;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
 .auth-button-container > a {
     margin-top: 8px;
 }
@@ -84,6 +102,15 @@ input[type="text"] {
     margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+input[type="email"]:focus, 
+input[type="password"]:focus, 
+input[type="text"]:focus {
+    outline: none;
+    border-color: #6BA4F7;
+    box-shadow: 0 0 5px rgba(107, 164, 247, 0.3);
 }
 
 button,
@@ -96,10 +123,17 @@ input[type="submit"] {
     background-color: var(--accent);
     background-color: #6BA4F7;
     color: white;
-    border: none;
+    border: 2px solid #6BA4F7;
     border-radius: 30px;
     cursor: pointer;
     letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+input[type="submit"]:focus {
+        outline: none;
+    border-color: #6BA4F7;
+    box-shadow: 0 0 5px rgba(107, 164, 247, 0.3);
 }
 
 button {
@@ -108,6 +142,12 @@ button {
 
 .switch-auth-mode {
     color: #6BA4F7;
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+}
+
+.switch-auth-mode:hover {
+    opacity: 0.6;
 }
 
 /* === signup.html === */
@@ -164,6 +204,14 @@ button {
     padding: 7px 28px;
     font-size: 16px;
     border-radius: 30px;
+    text-decoration: none;
+    border: 2px solid #6BA4F7;
+    transition: all 0.3s ease;
+}
+
+.cancel-button:hover {
+    background-color: #ffffff;
+    color: #6BA4F7;
 }
 
 textarea {
@@ -173,6 +221,10 @@ textarea {
     font-family: inherit;
     font-size: inherit;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.new-post-form > textarea::placeholder {
+    color: #999999;
 }
 
 .new-post-form > textarea::placeholder {
@@ -188,6 +240,12 @@ textarea {
     text-align: center;
     border-radius: 16px;
     overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.new-post-form > textarea:focus {
+    border-color: #6BA4F7;
+    box-shadow: 0 0 rgba(107, 164, 247, 0.4);
 }
 
 .new-post-container {
@@ -202,4 +260,11 @@ textarea {
     margin: 50px 0;
     border-radius: 10px;
     padding: 20px 0;
+    border: 2px solid #6BA4F7;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #ffffff;
+    color: #6BA4F7;
 }
