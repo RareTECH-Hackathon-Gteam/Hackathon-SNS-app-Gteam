@@ -1,0 +1,33 @@
+/* 404/500/その他エラー画面のCSS */
+
+a {
+  text-decoration: none;
+}
+
+.error-wrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.error-description {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  line-height: 32px;
+}
+
+.error-description p {
+  margin: 10px auto;
+}
+
+/* 500, 400ページ */
+
+.error-num {
+  font-size: 96px;
+  text-align: center;
+  font-weight: 900;
+  margin: 0px;
+}
