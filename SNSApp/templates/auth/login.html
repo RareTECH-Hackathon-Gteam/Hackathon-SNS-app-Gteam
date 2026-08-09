@@ -18,7 +18,7 @@
        
         <div class="form-group">
             <label>メールアドレス</label>
-            <input type="email" name="email" />
+            <input type="email" autocomplete="username" name="email" />
         </div>
 
         <!-- エラーメッセージ表示 -->
@@ -32,11 +32,11 @@
             {% endfor %}
         </div>
         {% endif %}
-        {% endwith%}
+        {% endwith %}
 
         <div class="form-group">
             <label>パスワード</label>
-            <input type="password" name="password" />
+            <input type="password" autocomplete="current-password" name="password" />
         </div>
         <div class="auth-button-container">
             <button class="auth-button" type="submit">ログイン</button>
