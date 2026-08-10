@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block page_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/my_page.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class = "page-my_page">
+  <!-- メイン -->
+  <h1>{{ users.name }} のページ</h1>
+  <main>
+    {% if posts and posts|length > 0 %}
+    <section class="post-list">
+      {% for post in posts %}
+      <div class="post-card">
+        <div class="post-content">
+          <div class="post-header">
+            <div class="post-user">
+              <span class="display-name">{{ post.user_name }}</span>
+            </div>
+            <div class="post-time">{{ post.created_at }}</div>
+          </div>
+          <div class="post-body">
+            {{ post.content }}
+          </div>
+          <div class="post-footer">
+            <div class="post-actions">
+              <!-- いいね（Good）ボタン -->
+              <button class="post-btn post-btn-good" disabled title="">
+                  いいね 👍 <span class="count">{{ post.good_count }}</span>
+              </button>
+              <!-- 便乗（Study）ボタン -->
+              <button class="post-btn post-btn-study" disabled title="ログインすると押せます">
+                  便乗！📖 <span class="count">{{ post.study_count }}</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </section>
+    {% else %}
+    <div class="empty">
+      <p>投稿がありません。</p>
+    </div>
+    {% endif %}
+  </main>
+</div>
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block page_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class = "page-index">
+  <!-- メイン -->
+  <main>
+    {% if posts and posts|length > 0 %}
+    <section class="post-list">
+      {% for post in posts %}
+      <div class="post-card">
+        <div class="post-content">
+          <div class="post-header">
+            <div class="post-user">
+              <span class="display-name">{{ post.user_name }}</span>
+            </div>
+            <div class="post-time">{{ post.created_at }}</div>
+          </div>
+          <div class="post-body">
+            {{ post.content }}
+          </div>
+          <div class="post-footer">
+            <div class="post-actions">
+              <!-- いいね（Good）ボタン -->
+              {% if is_logged_in %}
+                <form action="/posts/{{ post.id }}/good" method="post" style="display: inline;">
+                  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                  <button class="post-btn post-btn-good" type="submit">
+                    いいね 👍 <span class="count">{{ post.good_count }}</span>
+                  </button>
+                </form>
+              {% else %}
+                <button class="post-btn post-btn-good" disabled title="ログインすると押せます">
+                  いいね 👍 <span class="count">{{ post.good_count }}</span>
+                </button>
+              {% endif %}
+              <!-- 便乗（Study）ボタン -->
+              {% if is_logged_in %}
+                <form action="/posts/{{ post.id }}/study" method="post" style="display: inline;">
+                  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                  <button class="post-btn post-btn-study" type="submit">
+                    便乗！📖 <span class="count">{{ post.study_count }}</span>
+                  </button>
+                </form>
+              {% else %}
+                <button class="post-btn post-btn-study" disabled title="ログインすると押せます">
+                  便乗！📖 <span class="count">{{ post.study_count }}</span>
+                </button>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </section>
+    {% else %}
+    <div class="empty">
+      <p>投稿がありません。</p>
+    </div>
+    {% endif %}
+  </main>
+</div>
+{% endblock %}
