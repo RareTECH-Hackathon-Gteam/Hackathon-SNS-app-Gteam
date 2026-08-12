@@ -2,25 +2,8 @@
 <html lang="ja">
 
 <head>
-  <meta charset="UTF-8">
-  <title>{% block title %}mana-Link{% endblock %}</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/color.css') }}">
-  {% block page_css %}{% endblock %}
-</head>
-
-<body>
-  {% include 'common/header.html' %}
-
-  {% block content %}{% endblock %}
-
-  {% include 'common/footer.html' %}
-</body>
-
     <meta charset="UTF-8">
-    <title>{% block title %}SNS App{% endblock %}</title>
+    <title>{% block title %} mana-Link {% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
     <!-- Google Fonts (Gudea) の読み込み -->
@@ -28,11 +11,15 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Gudea:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/color.css') }}">
-    {% block page_css %}{% endblock %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/color.css') }}">
+  {% block page_css %}{% endblock %}
 </head>
 <body>
-    {% block content %}{% endblock %}
+  {% include 'common/header.html' %}
+
+  {% block content %}{% endblock %}
+
+  {% include 'common/footer.html' %}
 </body>
 </html>
