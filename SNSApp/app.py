@@ -60,6 +60,28 @@ def login_view():
         return redirect(url_for('posts_view'))    ###posts_view(タイムラインの表示)を後日作成
     return render_template('auth/login.html')    ###login.html(ログイン画面)を後日作成
 
+# login処理
+@app.route('/login', methods=['POST'])
+def login_process():
+    email = request.fom.get('email')
+    password = request.form.get('password')
+    # 空欄チェック
+    if not email or not password:
+        flash('全ての項目を入力してください', 'error')
+    else:
+        user = User.find_by_email(email)    ###後日Userクラスを作成
+        if user is None:
+            flash('メールアドレスまたはパスワードが間違っています', 'error')
+        else:
+            hushPassword = hashlib.sha256(password.encode('utf-8')).hexdigest()
+            if hushPassword != user['password']:
+                flash('メールアドレスまたはパスワードが間違っています', 'error')
+            else:
+                session['user_id'] = user['id']
+                flash('ログイン完了！', 'success')
+                return redirect(url_for('posts_view'))    ###posts_view(タイムラインの表示)を後日作成
+    return redirect(url_for('login_view'))    ###login_view(ログイン画面の表示)を後日作成
+
 # 投稿処理
 @app.route('/posts', methods=['POST'])
 def create_post():
