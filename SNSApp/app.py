@@ -4,7 +4,7 @@ import os
 import re
 import hashlib
 
-from models import Post
+from models import User, Post
 
 # 定数定義
 EMAIL_PATTERN = r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
