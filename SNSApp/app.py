@@ -2,6 +2,7 @@ from flask import Flask, request, session, redirect, url_for, jsonify, flash, re
 from flask_wtf.csrf import CSRFProtect
 import os
 import re
+import hashlib
 
 from models import Post
 
@@ -19,6 +20,38 @@ def signup_view():
     if session.get('user_id') is not None:
         return redirect(url_for('posts_view'))    ###posts_view(タイムラインの表示)を後日作成
     return render_template('auth/signup.html')    ###signup.html(サインアップ画面)を後日作成
+
+# signup処理
+@app.route('/signup', methods=['POST'])
+def signup_process():
+    name = request.form.get('name', '').strip()
+    email = request.form.get('email', '').strip()
+    password = request.form.get('password', '')
+    password_confirmation = request.form.get('password_confirmation', '')
+    # 空欄チェック
+    if not name or not email or not password or not password_confirmation:
+        flash('全ての項目を入力してください', 'error')
+        return redirect(url_for('signup_view'))
+    # passwordとpassword_confirmationの一致チェック
+    if password != password_confirmation:
+        flash('パスワードが一致しません', 'error')
+        return redirect(url_for('signup_view'))
+    # emailの形式チェック
+    if re.match(EMAIL_PATTERN, email) is None:
+        flash('メールアドレスの形式が正しくありません', 'error')
+        return redirect(url_for('signup_view'))
+    # 既存userの存在チェック
+    registered_user = User.fined_by_email(email)    ###後日Userクラスを作成
+    if registered_user is not None:
+        flash('既に登録されているメールアドレスです', 'error')
+        return redirect(url_for('signup_view'))
+    # passwordのハッシュ化
+    hushed_password = hashlib.sha256(password.encode('utf-8')).hexdigest()
+    # ユーザー登録処理
+    user_id = User.create(name, email, hushed_password)    ###後日Userクラスを作成
+    session['user_id'] = user_id
+    flash('登録完了！', 'success')
+    return redirect(url_for('posts_view'))    ###posts_view(タイムラインの表示
 
 # 投稿処理
 @app.route('/posts', methods=['POST'])
