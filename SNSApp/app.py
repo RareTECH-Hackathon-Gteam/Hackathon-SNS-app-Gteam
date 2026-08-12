@@ -4,10 +4,15 @@ import os
 import re
 import hashlib
 
-from models import User, Post
+from models import User, Post, Reaction
 
 # 定数定義
 EMAIL_PATTERN = r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
+# リアクション名とIDを辞書オブジェクト（定数）として定義する
+REACTION_NAME_DIC = {
+    "good": 1,
+    "study": 2
+}
 
 app = Flask(__name__)
 app.secret_key = os.environ['SECRET_KEY']
