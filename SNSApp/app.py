@@ -1,14 +1,17 @@
-from flask import Flask, request, session, redirect, url_for, jsonify, flash
+from flask import Flask, request, session, redirect, url_for, jsonify, flash, render_template
 from flask_wtf.csrf import CSRFProtect
 import os
+import re
 
 from models import Post
+
+# 定数定義
+EMAIL_PATTERN = r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
 
 app = Flask(__name__)
 app.secret_key = os.environ['SECRET_KEY']
 
 csrf = CSRFProtect(app)
-
 
 # 投稿処理
 @app.route('/posts', methods=['POST'])
