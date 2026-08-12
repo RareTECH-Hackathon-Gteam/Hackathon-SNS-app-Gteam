@@ -32,7 +32,7 @@ CREATE TABLE
     posts (
         id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
         user_id BIGINT UNSIGNED NOT NULL,
-        content TEXT NOT NULL,
+        contents TEXT NOT NULL,
         created_at DATETIME (6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
         updated_at DATETIME (6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
         deleted_at DATETIME (6) DEFAULT NULL,
@@ -62,7 +62,7 @@ VALUES
   ('山田太郎', 'taro@example.com', '937e8d5fbb48bd4949536cd65b8d35c426b80d2f830c5c308e2cdec422ae2244'),
   ('鈴木二郎', 'jiro@example.com', '937e8d5fbb48bd4949536cd65b8d35c426b80d2f830c5c308e2cdec422ae2244');
 
-INSERT INTO posts (user_id, content)
+INSERT INTO posts (user_id, contents)
 VALUES
   (1, 'こんにちは！初めての投稿です。'),
   (1, '今日はとても良い天気ですね。'),
