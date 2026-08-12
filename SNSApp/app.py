@@ -107,6 +107,8 @@
 # if __name__ == '__main__':
 #     app.run(host="0.0.0.0", debug=True)    ###debug=Trueは後で変更？
 
+# この下からダミーデータです！
+
 from flask import Flask, request, redirect, render_template, session, flash, abort, url_for
 
 #from flask_wtf.csrf import CSRFProtect
@@ -146,12 +148,87 @@ def create_post_view():
 
 @app.route('/posts', methods=['GET'])
 def posts_view():
-    return render_template('/index.html')
+    dummy_posts = [
+            {
+                'id': 1,
+                'user_name': 'さくら',
+                'created_at': '2026-08-13 12:15',
+                'content': '新しいプログラミング言語の学習を始めました！まずは公式ドキュメントを読んでみます。',
+                'good_count': 32,
+                'study_count': 14
+            },
+            {
+                'id': 2,
+                'user_name': '健太',
+                'created_at': '2026-08-13 10:05',
+                'content': 'マイページのUIレイアウトが完成しました。次はデータベースとの接続処理を実装します。',
+                'good_count': 18,
+                'study_count': 5
+            },
+            {
+                'id': 3,
+                'user_name': '翔太',
+                'created_at': '2026-08-12 23:45',
+                'content': 'エラーが解決できずに3時間経過…。今日は諦めて寝ます。',
+                'good_count': 45,
+                'study_count': 2
+            },
+            {
+                'id': 4,
+                'user_name': 'Yuki',
+                'created_at': '2026-08-12 18:30',
+                'content': 'チーム開発のミーティング終了。それぞれのタスク分担が明確になって進めやすくなりました！',
+                'good_count': 21,
+                'study_count': 8
+            }
+        ]
+
+    return render_template(
+        'index.html',
+        posts=dummy_posts,
+        is_logged_in=True 
+    )
 
 @app.route('/mypage', methods=['GET'])
 def mypage_view():
-    return render_template('users/my_page.html')
+    # マイページ用なので、user_nameはすべて同一ユーザー（健太）にする
+    dummy_posts = [
+        {
+            'id': 101,
+            'user_name': '健太',
+            'created_at': '2026-08-10 19:30',
+            'content': '今日からポートフォリオ用のSNSアプリ開発を本格的にスタート！',
+            'good_count': 15,
+            'study_count': 5
+        },
+        {
+            'id': 102,
+            'user_name': '健太',
+            'created_at': '2026-08-11 22:15',
+            'content': 'フロントエンドとバックエンドの連携で少し苦戦中。APIの設計をもう一度見直す必要があるかも。',
+            'good_count': 8,
+            'study_count': 12
+        },
+        {
+            'id': 103,
+            'user_name': '健太',
+            'created_at': '2026-08-12 14:00',
+            'content': 'マイページのUIレイアウトを作成中。ダミーデータを入れて表示崩れがないか確認しています。',
+            'good_count': 24,
+            'study_count': 3
+        }
+    ]
 
+    # コメントアウトされている {{ users.name }} に対応させるためのユーザーデータ
+    dummy_user = {
+        'name': '健太'
+    }
+
+    return render_template(
+        'users/my_page.html',
+        posts=dummy_posts,
+        users=dummy_user
+    )
 if __name__ == '__main__':
 
     app.run(host="0.0.0.0", debug=True)
