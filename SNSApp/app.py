@@ -53,6 +53,13 @@ def signup_process():
     flash('登録完了！', 'success')
     return redirect(url_for('posts_view'))    ###posts_view(タイムラインの表示
 
+# loginページ表示
+@app.route('/login', methods=['GET'])
+def login_view():
+    if session.get('user_id') is not None:
+        return redirect(url_for('posts_view'))    ###posts_view(タイムラインの表示)を後日作成
+    return render_template('auth/login.html')    ###login.html(ログイン画面)を後日作成
+
 # 投稿処理
 @app.route('/posts', methods=['POST'])
 def create_post():
