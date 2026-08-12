@@ -82,6 +82,13 @@ def login_process():
                 return redirect(url_for('posts_view'))    ###posts_view(タイムラインの表示)を後日作成
     return redirect(url_for('login_view'))    ###login_view(ログイン画面の表示)を後日作成
 
+# logout処理
+@app.route('/logout', methods=['POST'])
+def logout():
+    session.clear()
+    flash('ログアウトしました', 'success')
+    return redirect(url_for('login_view'))    ###login_view(ログイン画面の表示)を後日作成
+
 # 投稿処理
 @app.route('/posts', methods=['POST'])
 def create_post():
