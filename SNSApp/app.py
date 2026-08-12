@@ -13,6 +13,13 @@ app.secret_key = os.environ['SECRET_KEY']
 
 csrf = CSRFProtect(app)
 
+# signupページ表示
+@app.route('/signup', methods=['GET'])
+def signup_view():
+    if session.get('user_id') is not None:
+        return redirect(url_for('posts_view'))    ###posts_view(タイムラインの表示)を後日作成
+    return render_template('auth/signup.html')    ###signup.html(サインアップ画面)を後日作成
+
 # 投稿処理
 @app.route('/posts', methods=['POST'])
 def create_post():
