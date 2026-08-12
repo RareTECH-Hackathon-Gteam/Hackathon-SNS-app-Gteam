@@ -108,6 +108,18 @@ def create_post():
     flash('投稿完了！', 'success')
     return redirect(url_for('posts_view'))    ###posts_view(タイムラインの表示)を後日作成
 
+# リアクションの処理（URLのリアクション名の部分も変数として受け取る）
+@app.route('/posts/<init:post_id>/<string:reaction_name>', methods=['POST'])
+def react_to_post(post_id, reaction_name):
+    user_id = session.get('user_id')
+    if user_id is None:
+        return redirect(url_for('login_view'))
+    # 登録した辞書からIDを取得
+    reaction_id = REACTION_NAME_DIC.get(reaction_name)
+    # リアクションのトグル処理を実行
+    Reaction.toggle_reaction(user_id, post_id, reaction_id)
+    # posts_viewへリダイレクトする
+    return redirect(url_for('posts_view'))
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", debug=True)    ###debug=Trueは後で変更？
