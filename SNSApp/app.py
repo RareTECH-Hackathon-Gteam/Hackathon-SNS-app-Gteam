@@ -63,7 +63,7 @@ def login_view():
 # login処理
 @app.route('/login', methods=['POST'])
 def login_process():
-    email = request.fom.get('email')
+    email = request.form.get('email')
     password = request.form.get('password')
     # 空欄チェック
     if not email or not password:
