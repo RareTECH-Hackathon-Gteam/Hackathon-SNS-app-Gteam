@@ -41,7 +41,7 @@ def signup_process():
         flash('メールアドレスの形式が正しくありません', 'error')
         return redirect(url_for('signup_view'))
     # 既存userの存在チェック
-    registered_user = User.fined_by_email(email)    ###後日Userクラスを作成
+    registered_user = User.find_by_email(email)    ###後日Userクラスを作成
     if registered_user is not None:
         flash('既に登録されているメールアドレスです', 'error')
         return redirect(url_for('signup_view'))
