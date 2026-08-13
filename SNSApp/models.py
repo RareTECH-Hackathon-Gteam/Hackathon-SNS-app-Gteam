@@ -87,18 +87,18 @@ class Reaction:
                     cur.execute(insert_sql, (user_id, post_id, reaction_id))
                 # リアクションがすでに存在していた場合は削除する
                 else:
-                    delete_sql = "DELETE FROM reactions WHERE user_id = %s AND post_id = %S AND reaction_id = %s;"
+                    delete_sql = "DELETE FROM reactions WHERE user_id = %s AND post_id = %s AND reaction_id = %s;"
                     cur.execute(delete_sql, (user_id, post_id, reaction_id))
                 conn.commit()   ###コミットして確定させる
         except pymysql.Error as e:
             print(f'エラーが発生しています：{e}')
             abort(500)
         finally:
-            db_pool.release(conn) 
+            db_pool.release(conn)
         
     # リアクション数カウント
     def count_reaction(cls, post_id, reaction_id):
-        conn = db_pool.get.conn()
+        conn = db_pool.get_conn()
         try:
             with conn.cursor() as cur:
                 sql = "SELECT COUNT(*) FROM reactions WHERE post_id = %s AND reaction_id = %s;"
@@ -111,4 +111,4 @@ class Reaction:
             print(f'エラーが発生しています：{e}')
             abort(500)
         finally:
-            db_pool.release(conn)   
+            db_pool.release(conn)
