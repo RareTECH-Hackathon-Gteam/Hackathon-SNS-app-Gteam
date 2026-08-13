@@ -53,7 +53,7 @@ CREATE TABLE
         KEY idx_reactions_post_id (post_id),
         CONSTRAINT fk_reactions_user FOREIGN KEY (user_id) REFERENCES users (id),
         CONSTRAINT fk_reactions_post FOREIGN KEY (post_id) REFERENCES posts (id),
-        CONSTRAINT fk_reactions_reaction_mst FOREIGN KEY (reaction_id) REFERENCES reacion_mst (id),
+        CONSTRAINT fk_reactions_reaction_mst FOREIGN KEY (reaction_id) REFERENCES reaction_mst (id),
         UNIQUE (user_id, post_id, reaction_id)
     ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
 
