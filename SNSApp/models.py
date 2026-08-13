@@ -103,7 +103,7 @@ class Reaction:
             with conn.cursor() as cur:
                 sql = "SELECT COUNT(*) FROM reactions WHERE post_id = %s AND reaction_id = %s;"
                 cur.execute(sql, (post_id, reaction_id))
-                result = conn.fetchone()
+                result = cur.fetchone()
                 # カウント結果がタプルで返ってくるので、その要素を取り出して変数に格納
                 reaction_count = result[0]  
             return reaction_count
