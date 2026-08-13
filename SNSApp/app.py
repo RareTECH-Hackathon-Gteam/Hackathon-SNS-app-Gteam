@@ -109,7 +109,7 @@ def create_post():
     return redirect(url_for('posts_view'))    ###posts_view(タイムラインの表示)を後日作成
 
 # リアクションの処理（URLのリアクション名の部分も変数として受け取る）
-@app.route('/posts/<init:post_id>/<string:reaction_name>', methods=['POST'])
+@app.route('/posts/<int:post_id>/<string:reaction_name>', methods=['POST'])
 def react_to_post(post_id, reaction_name):
     user_id = session.get('user_id')
     if user_id is None:
