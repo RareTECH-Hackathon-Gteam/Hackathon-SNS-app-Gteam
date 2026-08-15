@@ -41,21 +41,33 @@ CREATE TABLE
         CONSTRAINT fk_posts_user FOREIGN KEY (user_id) REFERENCES users (id)
     ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
 
-CREATE TABLE
-    comments (
+CREATE TABLE 
+    reactions (
         id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
         user_id BIGINT UNSIGNED NOT NULL,
         post_id BIGINT UNSIGNED NOT NULL,
-        content TEXT NOT NULL,
+        reaction_id BIGINT UNSIGNED NOT NULL,
         created_at DATETIME (6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-        updated_at DATETIME (6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
         PRIMARY KEY (id),
-        KEY idx_comments_user_id (user_id),
-        KEY idx_comments_post_id (post_id),
-        CONSTRAINT fk_comments_user FOREIGN KEY (user_id) REFERENCES users (id),
-        CONSTRAINT fk_comments_post FOREIGN KEY (post_id) REFERENCES posts (id)
+        KEY idx_reactions_user_id (user_id),
+        KEY idx_reactions_post_id (post_id),
+        CONSTRAINT fk_reactions_user FOREIGN KEY (user_id) REFERENCES users (id),
+        CONSTRAINT fk_reactions_post FOREIGN KEY (post_id) REFERENCES posts (id),
+        CONSTRAINT fk_reactions_reaction_mst FOREIGN KEY (reaction_id) REFERENCES reaction_mst (id),
+        UNIQUE (user_id, post_id, reaction_id)
     ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
 
+CREATE TABLE
+    reaction_mst (
+        id BIGINT UNSIGNED NOT NULL UNIQUE,
+        reaction_name CHAR(50) NOT NULL,
+        PRIMARY KEY (id)
+    ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
+
+INSERT INTO reaction_mst (id, reaction_name)
+VALUES
+    (1, 'good'),
+    (2, 'study');
 
 INSERT INTO users (name, email, password)
 VALUES 
