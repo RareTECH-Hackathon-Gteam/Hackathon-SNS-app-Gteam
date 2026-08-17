@@ -37,7 +37,10 @@
             {% endif %}
             {% endwith %}
 
-            <textarea name="content" placeholder="今日の勉強を共有しよう！" maxlength="140"></textarea>
+            <div class="textarea-wrapper">
+                <textarea id="post-content" name="content" placeholder="今日の勉強を共有しよう！" maxlength="140"></textarea>
+                <div id="char-count" class="char-count-display">0/140</div>
+            </div>
             <div class="new-post-footer">
                 <button class="btn-primary" type="submit">
                     投稿作成
@@ -46,4 +49,14 @@
         </form>
     </section>
  </div>
- {% endblock %}
+
+ <script>
+    const textarea = document.getElementById('post-content');
+    const charCount = document.getElementById('char-count');
+
+    textarea.addEventListener('input', () => {
+        const currentLength = textarea.value.length;
+        charCount.textContent = `${currentLength}/140`;
+    });
+</script>
+{% endblock %}
