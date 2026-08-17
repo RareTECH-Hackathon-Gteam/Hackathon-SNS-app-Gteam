@@ -68,3 +68,47 @@ class Post:
         finally:
             db_pool.release(conn)
 
+#Reactionクラス
+class Reaction:
+    @classmethod
+    # リアクションのトグル処理
+    def toggle_reaction(cls, user_id, post_id, reaction_id):
+        conn = db_pool.get_conn()
+        try:
+            with conn.cursor() as cur:
+                # リアクションがすでに存在するかをチェック
+                check_sql = "SELECT id FROM reactions WHERE user_id = %s AND post_id = %s AND reaction_id = %s;"
+                cur.execute(check_sql, (user_id, post_id, reaction_id))
+                existing_reaction = cur.fetchone()
+                # 分岐処理
+                # リアクションが存在しなかった場合は追加する
+                if existing_reaction is None:
+                    insert_sql = "INSERT INTO reactions (user_id, post_id, reaction_id) VALUES (%s, %s, %s);"
+                    cur.execute(insert_sql, (user_id, post_id, reaction_id))
+                # リアクションがすでに存在していた場合は削除する
+                else:
+                    delete_sql = "DELETE FROM reactions WHERE user_id = %s AND post_id = %s AND reaction_id = %s;"
+                    cur.execute(delete_sql, (user_id, post_id, reaction_id))
+                conn.commit()   ###コミットして確定させる
+        except pymysql.Error as e:
+            print(f'エラーが発生しています：{e}')
+            abort(500)
+        finally:
+            db_pool.release(conn)
+        
+    # リアクション数カウント
+    def count_reaction(cls, post_id, reaction_id):
+        conn = db_pool.get_conn()
+        try:
+            with conn.cursor() as cur:
+                sql = "SELECT COUNT(*) FROM reactions WHERE post_id = %s AND reaction_id = %s;"
+                cur.execute(sql, (post_id, reaction_id))
+                result = cur.fetchone()
+                # カウント結果がタプルで返ってくるので、その要素を取り出して変数に格納
+                reaction_count = result[0]  
+            return reaction_count
+        except pymysql.Error as e:
+            print(f'エラーが発生しています：{e}')
+            abort(500)
+        finally:
+            db_pool.release(conn)
