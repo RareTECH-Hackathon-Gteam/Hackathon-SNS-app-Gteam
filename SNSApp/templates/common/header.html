@@ -1,0 +1,11 @@
+<header>
+  <div class="header-inner">
+    <a href="{{ url_for('posts_view') }}" class="logo">mana-Link</a>
+      
+    {% if session.get('user_id') %}
+    <a class="logout" href="{{ url_for('logout') }}">ログアウト</a>
+    {% else %}
+    <a class="login" href="{{ url_for('login_view') }}">ログイン</a>
+    {% endif %}
+  </div>
+</header>
