@@ -15,15 +15,15 @@ body {
   color: var(--text-main);
   max-width: 440px;
   height: 890px;
-  overflow-y: auto;
+  overflow: hidden;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .logo {
-  font-weight: 700;
+  font-weight: normal;
   text-decoration: none;
   font-size: 16px;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   color: var(--text-sub);
 }
 
