@@ -2,11 +2,21 @@
   box-sizing: border-box;
 }
 
+/* スマホの画面以外の部分を白に */
+html {
+  background-color: #ffffff;
+}
+
+
 body {
-  margin: 0 !important;; 
+  margin: 0 auto !important;; 
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   background: radial-gradient(circle at top left, #e0f2fe 0, #f4f7fb 40%, #f4f7fb 100%);
   color: var(--text-main);
+  max-width: 440px;
+  height: 890px;
+  overflow-y: auto;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .logo {

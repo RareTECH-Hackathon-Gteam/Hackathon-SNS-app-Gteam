@@ -3,7 +3,7 @@
 }
 
 main {
-  max-width: 680px;
+  /* max-width: 680px; */
   margin: 0 auto;
   padding: 24px 16px 48px;
 }
@@ -34,12 +34,16 @@ main {
   padding: 14px 16px 12px;
   border: 1px solid rgba(226, 232, 240, 0.9);
   display: flex;
+  max-width: 340px;
+  width: 100%;
+  margin: 0 auto;
+  margin-bottom: 10px;
 }
 
-.post-card:hover {
+/* .post-card:hover {
   background: rgba(249, 250, 251, 0.9);
   border-color: rgba(191, 219, 254, 0.9);
-}
+} */
 
 .post-content {
   flex: 1;
@@ -57,11 +61,15 @@ main {
 .post-user {
   display: flex;
   align-items: baseline;
-  font-size: 14px;
+  font-size: 20px;
+  margin-bottom: 10px;
 }
 
 .display-name {
-  font-weight: 600;
+  font-weight: normal;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 0.5px;
 }
 
 .post-time {
@@ -71,11 +79,12 @@ main {
 }
 
 .post-body {
-  font-size: 15px;
+  font-size: 16px;
   color: #111827;
   line-height: 1.6;
   text-align: left;
   overflow-wrap: anywhere;
+  margin: 10px;
 }
 
 .post-footer {
@@ -94,8 +103,8 @@ main {
 }
 
 .post-btn {
-  border-radius: 999px;
-  padding: 4px 10px;
+  border-radius: 10px;
+  padding: 10px 20px;
   font-size: 13px;
   border: 1px solid rgba(148, 163, 184, 0.5);
   background: rgba(255, 255, 255, 0.7);
@@ -104,21 +113,42 @@ main {
   align-items: center;
   color: #374151;
   text-decoration: none;
-  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.25);
+  /* box-shadow: 0 6px 18px rgba(37, 99, 235, 0.25); */
+  border: none;
+  background-clip: padding-box;
+
 }
 
 .post-btn-good {
   background-color: var(--button-good);
-  border-color: #374151;
+  border: 2px solid var(--button-good);
+  /* border-color: #374151; */
   color: var(--text-main);
   transition: background-color 0.2s, border-color 0.2s;
 }
 
+.post-btn-good:hover {
+    color: var(--button-good);
+    background-color: #ffffff;
+    border: 2px solid var(--button-good);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
 .post-btn-study {
   background-color: var(--button-study);
-  border-color: #FFD870;
+  border: 2px solid var(--button-study);
+  /* border-color: #FFD870; */
   color: var(--text-main);
   transition: background-color 0.2s, border-color 0.2s;
+}
+
+.post-btn-study:hover {
+  color: #C29000;
+  background-color: #ffffff;
+  border: 2px solid var(--button-study);
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .empty {

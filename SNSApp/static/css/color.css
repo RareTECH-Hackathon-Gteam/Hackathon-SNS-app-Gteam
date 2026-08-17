@@ -9,6 +9,6 @@
   --danger: #ef4444;
   --radius-lg: 16px;
   --button-base:#6ba4f7;
-  --button-good:rgba(107, 164, 247, 0.6);
-  --button-study:rgba(255, 216, 112, 0.6);
+  --button-good:rgba(107, 164, 247, 0.4);
+  --button-study:rgba(255, 216, 112, 0.4);
 }
