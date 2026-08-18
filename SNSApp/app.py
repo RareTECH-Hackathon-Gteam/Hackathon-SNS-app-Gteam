@@ -94,12 +94,20 @@ def logout():
     flash('ログアウトしました', 'success')
     return redirect(url_for('login_view'))    ###login_view(ログイン画面の表示)を後日作成
 
+# タイムラインの表示
+@app.route('/', methods=['GET'])
+def posts_view():
+    posts = Post.get_all()
+    for post in posts:
+        post['created_at'] = post['created_at'].strftime('%Y-%m-%d %H:%M')
+    return render_template('post/post.html', posts=posts, user_id=user_id)
+
 # 投稿処理
 @app.route('/posts', methods=['POST'])
 def create_post():
     user_id = session.get('user_id')
     if user_id is None:
-        return redirect(url_for('login_view'))    ###login_view(ログイン画面の表示)を後日作成
+        return redirect(url_for('login_view'))
     contents = request.form.get('content', '').strip()
     if contents == '':
         flash ('投稿内容が空です', 'error')
