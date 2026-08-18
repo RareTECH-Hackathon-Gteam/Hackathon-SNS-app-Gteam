@@ -162,6 +162,19 @@ main {
   font-size: 14px;
 }
 
+.btn-primary {
+    margin: 50px 0;
+    border-radius: 10px;
+    padding: 20px 0;
+    border: 2px solid #6BA4F7;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #ffffff;
+    color: #6BA4F7;
+}
+
 @media (max-width: 640px) {
   main {
     padding-inline: 13px;

@@ -48,6 +48,19 @@ header{
   text-decoration: none;
 }
 
+.login {
+  border-radius: 999px;
+  padding: 4px 8px;
+  font-size: 13px;
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  background: #6BA4F7;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
 .header-inner {
   display: flex;
   align-items: center;
