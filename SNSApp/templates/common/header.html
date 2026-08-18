@@ -1,11 +1,24 @@
 <header>
   <div class="header-inner">
-    <a href="{{ url_for('posts_view') }}" class="logo">mana-Link</a>
       
-    {% if session.get('user_id') %}
-    <a class="logout" href="{{ url_for('logout') }}">ログアウト</a>
-    {% else %}
-    <a class="login" href="{{ url_for('login_view') }}">ログイン</a>
+    {% if header_type == 'logout' %}
+    <a href="{{ url_for('posts_view') }}" class="logo">mana-Link</a>
+    <a class="header-button" href="{{ url_for('logout') }}">ログアウト</a>
+    {% elif header_type == 'login' %}
+    <a href="{{ url_for('posts_view') }}" class="logo">mana-Link</a>
+    <a class="header-button" href="{{ url_for('login_view') }}">ログイン</a>
+    {% elif header_type == 'cancel'%}
+    <a href="{{ url_for('posts_view') }}" class="logo">mana-Link</a>
+    <a class="header-button" href="{{ url_for('posts_view') }}">キャンセル</a>
+    {% elif header_type == 'mypage'%}
+    <a href="{{ url_for('posts_view') }}" class="logo">mana-Link</a>
+    <a class="header-button" href="{{ url_for('posts_view') }}">マイページ</a>
+    {% elif header_type == 'timeline'%}
+    <a href="{{ url_for('posts_view') }}" class="logo">mana-Link</a>
+    <a class="header-button" href="{{ url_for('mypage_view') }}">タイムライン</a>
+    <a class="header-button" href="{{ url_for('mypage_view') }}">ログアウト</a>
     {% endif %}
   </div>
+
+  
 </header>

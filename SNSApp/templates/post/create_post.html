@@ -8,17 +8,7 @@
 
 {% block content %}
 
-<!-- ヘッダー -->
 <div class="auth-wrapper">
-    <header class="post-header">
-        <div class="header-inner">
-            <a href="{{ url_for('posts_view') }}" class="logo">mana-Link</a>
-            
-            <a href="{{ url_for('posts_view') }}" class="cancel-button">キャンセル</a>
-
-        </div>
-    </header>
-
     <!-- 投稿フォーム -->
     <section class="new-post-container">
         <form class="new-post-form" action="/posts" method="post">

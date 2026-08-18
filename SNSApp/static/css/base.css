@@ -20,10 +20,10 @@ body {
 }
 
 .logo {
+  justify-content: flex-start;
   font-weight: normal;
   text-decoration: none;
   font-size: 16px;
-  /* text-transform: uppercase; */
   color: var(--text-sub);
 }
 
@@ -35,22 +35,9 @@ header{
   width: 100%;
 }
 
-.logout {
+.header-button {
   border-radius: 999px;
-  padding: 4px 8px;
-  font-size: 13px;
-  border: 1px solid rgba(148, 163, 184, 0.5);
-  background: #6BA4F7;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  color: #FFFFFF;
-  text-decoration: none;
-}
-
-.login {
-  border-radius: 999px;
-  padding: 4px 8px;
+  padding: 4px 12px;
   font-size: 13px;
   border: 1px solid rgba(148, 163, 184, 0.5);
   background: #6BA4F7;
