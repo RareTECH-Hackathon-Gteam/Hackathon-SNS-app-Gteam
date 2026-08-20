@@ -130,7 +130,7 @@ def my_page_view(user_id):
     # ユーザーの投稿を取得
     posts = Post.get_own_posts(user_id)
     for post in posts:
-        post['created_at'] = post['created_at'].strftime('%Y-%m-%d %H:%M:%S')
+        post['created_at'] = post['created_at'].strftime('%Y-%m-%d %H:%M')
     return render_template('users/my_page.html', user_name=user_name, posts=posts)
 
 if __name__ == '__main__':
