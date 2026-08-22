@@ -24,6 +24,7 @@ CREATE TABLE
         password VARCHAR(255) NOT NULL,
         created_at DATETIME (6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
         updated_at DATETIME (6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
+        deleted_at DATETIME (6) DEFAULT NULL,
         PRIMARY KEY (id),
         UNIQUE KEY uq_users_email (email)
     ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_unicode_ci;

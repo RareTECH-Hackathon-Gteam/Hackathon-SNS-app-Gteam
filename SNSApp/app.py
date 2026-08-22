@@ -23,8 +23,8 @@ csrf = CSRFProtect(app)
 @app.route('/signup', methods=['GET'])
 def signup_view():
     if session.get('user_id') is not None:
-        return redirect(url_for('posts_view'))    ###posts_view(タイムラインの表示)を後日作成
-    return render_template('auth/signup.html')    ###signup.html(サインアップ画面)を後日作成
+        return redirect(url_for('posts_view'))
+    return render_template('auth/signup.html')
 
 # signup処理
 @app.route('/signup', methods=['POST'])
@@ -46,24 +46,24 @@ def signup_process():
         flash('メールアドレスの形式が正しくありません', 'error')
         return redirect(url_for('signup_view'))
     # 既存userの存在チェック
-    registered_user = User.find_by_email(email)    ###後日Userクラスを作成
+    registered_user = User.find_by_email(email)
     if registered_user is not None:
         flash('既に登録されているメールアドレスです', 'error')
         return redirect(url_for('signup_view'))
     # passwordのハッシュ化
     hushed_password = hashlib.sha256(password.encode('utf-8')).hexdigest()
     # ユーザー登録処理
-    user_id = User.create(name, email, hushed_password)    ###後日Userクラスを作成
+    user_id = User.create(name, email, hushed_password)
     session['user_id'] = user_id
     flash('登録完了！', 'success')
-    return redirect(url_for('posts_view'))    ###posts_view(タイムラインの表示
+    return redirect(url_for('posts_view'))
 
 # loginページ表示
 @app.route('/login', methods=['GET'])
 def login_view():
     if session.get('user_id') is not None:
-        return redirect(url_for('posts_view'))    ###posts_view(タイムラインの表示)を後日作成
-    return render_template('auth/login.html')    ###login.html(ログイン画面)を後日作成
+        return redirect(url_for('posts_view'))
+    return render_template('auth/login.html')
 
 # login処理
 @app.route('/login', methods=['POST'])
@@ -74,7 +74,7 @@ def login_process():
     if not email or not password:
         flash('全ての項目を入力してください', 'error')
     else:
-        user = User.find_by_email(email)    ###後日Userクラスを作成
+        user = User.find_by_email(email)
         if user is None:
             flash('メールアドレスまたはパスワードが間違っています', 'error')
         else:
@@ -84,22 +84,30 @@ def login_process():
             else:
                 session['user_id'] = user['id']
                 flash('ログイン完了！', 'success')
-                return redirect(url_for('posts_view'))    ###posts_view(タイムラインの表示)を後日作成
-    return redirect(url_for('login_view'))    ###login_view(ログイン画面の表示)を後日作成
+                return redirect(url_for('posts_view'))
+    return redirect(url_for('login_view'))
 
 # logout処理
 @app.route('/logout', methods=['POST'])
 def logout():
     session.clear()
     flash('ログアウトしました', 'success')
-    return redirect(url_for('login_view'))    ###login_view(ログイン画面の表示)を後日作成
+    return redirect(url_for('login_view'))
+
+# タイムラインの表示
+@app.route('/', methods=['GET'])
+def posts_view():
+    posts = Post.get_all()
+    for post in posts:
+        post['created_at'] = post['created_at'].strftime('%Y-%m-%d %H:%M')
+    return render_template('post/post.html', posts=posts, user_id=user_id)
 
 # 投稿処理
 @app.route('/posts', methods=['POST'])
 def create_post():
     user_id = session.get('user_id')
     if user_id is None:
-        return redirect(url_for('login_view'))    ###login_view(ログイン画面の表示)を後日作成
+        return redirect(url_for('login_view'))
     contents = request.form.get('content', '').strip()
     if contents == '':
         flash ('投稿内容が空です', 'error')
@@ -120,6 +128,18 @@ def react_to_post(post_id, reaction_name):
     Reaction.toggle_reaction(user_id, post_id, reaction_id)
     # posts_viewへリダイレクトする
     return redirect(url_for('posts_view'))
+
+# マイページ表示
+@app.route('/my_page/<int:user_id>', methods=['GET'])
+def my_page_view(user_id):
+    user_name = User.get_name_by_id(user_id)
+    if user_name is None:
+        return redirect(url_for('login_view'))
+    # ユーザーの投稿を取得
+    posts = Post.get_own_posts(user_id)
+    for post in posts:
+        post['created_at'] = post['created_at'].strftime('%Y-%m-%d %H:%M')
+    return render_template('users/my_page.html', user_name=user_name, posts=posts)
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", debug=True)    ###debug=Trueは後で変更？
