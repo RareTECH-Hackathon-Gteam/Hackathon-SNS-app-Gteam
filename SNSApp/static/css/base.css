@@ -22,7 +22,6 @@ body {
 }
 
 /* 2. 中間の親要素も高さを引き継ぐように設定 */
-.page-index,
 main {
   display: flex;
   flex-direction: column;
@@ -42,7 +41,7 @@ main {
 
 /* ホバー時は少し濃くする */
 .app-scroll-area::-webkit-scrollbar-thumb:hover {
-  background: rgba(84, 133, 239, 0.7); /* または #60a5fa */
+  background: rgba(91, 136, 235, 0.7); /* または #60a5fa */
 }
 
 .logo {
