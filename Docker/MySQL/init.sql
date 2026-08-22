@@ -72,16 +72,22 @@ VALUES
 
 INSERT INTO users (name, email, password)
 VALUES 
-  ('山田太郎', 'taro@example.com', '937e8d5fbb48bd4949536cd65b8d35c426b80d2f830c5c308e2cdec422ae2244'),
-  ('鈴木二郎', 'jiro@example.com', '937e8d5fbb48bd4949536cd65b8d35c426b80d2f830c5c308e2cdec422ae2244');
+  ('佳奈', 'kana@example.com', '937e8d5fbb48bd4949536cd65b8d35c426b80d2f830c5c308e2cdec422ae2244'),
+  ('美穂', 'miho@example.com', '937e8d5fbb48bd4949536cd65b8d35c426b80d2f830c5c308e2cdec422ae2244'),
+  ('健太', 'kenta@example.com', '937e8d5fbb48bd4949536cd65b8d35c426b80d2f830c5c308e2cdec422ae2244');
 
 INSERT INTO posts (user_id, contents)
 VALUES
-  (1, 'こんにちは！初めての投稿です。'),
-  (1, '今日はとても良い天気ですね。'),
-  (1, '今日も勉強頑張ります！');
+  (1, 'IPアドレスはネットワーク上の住所のようなもの！'),
+  (2, '今日はコマンドライン操作を学習しました'),
+  (3, '今日は1時間。コツコツが大事！'),
+  (3, '夜に2時間プログラミング問題解きました！');
 
-
-INSERT INTO comments (user_id, post_id, content)
+INSERT INTO reactions (user_id, post_id, reaction_id)
 VALUES
-    (2, 1, '応援しています！頑張ってください。');
+    (1, 3, 1),
+    (1, 4, 2),
+    (2, 2, 1),
+    (2, 4, 1),
+    (2, 4, 2),
+    (3, 2, 1);
