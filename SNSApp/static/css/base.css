@@ -17,6 +17,32 @@ body {
   height: 890px;
   overflow: hidden;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+/* 2. 中間の親要素も高さを引き継ぐように設定 */
+.page-index,
+main {
+  display: flex;
+  flex-direction: column;
+  flex: 1; /* 親の余った高さをいっぱいに使う */
+  min-height: 0; /* Flex子要素のはみ出しスクロールを許可するための重要プロパティ */
+}
+
+/* 3. スクロールエリアの設定（100vh は削除する） */
+.app-scroll-area {
+  flex: 1; /* 残りの高さをすべてこのエリアに割り当てる */
+  overflow-y: auto; /* はみ出た分をスクロール */
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+  scrollbar-color:rgba(96, 151, 239, 0.5) #f1f5f9;
+  scrollbar-width: thin; 
+}
+
+/* ホバー時は少し濃くする */
+.app-scroll-area::-webkit-scrollbar-thumb:hover {
+  background: rgba(84, 133, 239, 0.7); /* または #60a5fa */
 }
 
 .logo {

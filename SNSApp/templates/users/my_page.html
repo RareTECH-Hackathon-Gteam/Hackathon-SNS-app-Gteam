@@ -7,14 +7,11 @@
 {% block content %}
 <div class = "page-my_page">
   <!-- メイン -->
-  {# <h1>{{ users.name }} のページ</h1> #}
-  
-  <!-- test -->
-  <h1>健太のページ</h1>
-  
+  <h1>{{ users.name }} のページ</h1>
+    
   <main>
     {% if posts and posts|length > 0 %}
-    <section class="post-list">
+    <section class="post-list app-scroll-area">
       {% for post in posts %}
       <div class="post-card">
         <div class="post-content">
@@ -54,11 +51,6 @@
       <p>投稿がありません。</p>
     </div>
     {% endif %}
-    <div>
-      <button class="btn-primary" type="submit">
-          投稿作成
-      </button>
-    </div>
   </main>
 </div>
 {% endblock %}
