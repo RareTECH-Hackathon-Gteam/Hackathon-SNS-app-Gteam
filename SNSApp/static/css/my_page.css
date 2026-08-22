@@ -5,6 +5,9 @@
 main {
   margin: 0 auto;
   padding: 24px 16px 48px;
+  height: 800px; 
+  /* 中身が指定の高さを超えたら縦スクロールを表示 */
+  overflow-y: auto;  gap: 8px;
 }
 
 .page-title {

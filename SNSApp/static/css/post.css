@@ -5,6 +5,9 @@
 main {
   margin: 0 auto;
   padding: 24px 16px 48px;
+  height: 800px; 
+  /* 中身が指定の高さを超えたら縦スクロールを表示 */
+  overflow-y: auto;  gap: 8px;
 }
 
 .page-title {
@@ -24,7 +27,6 @@ main {
 .post-list {
   display: flex;
   flex-direction: column;
-  gap: 8px;
 }
 
 .post-card {
@@ -70,7 +72,6 @@ main {
   text-underline-offset: 3px;
   text-decoration-thickness: 0.5px;
 }
-
 
 .post-time {
   color: var(--text-sub);
@@ -156,6 +157,31 @@ main {
   background: rgba(255, 255, 255, 0.7);
   color: var(--text-sub);
   font-size: 14px;
+}
+
+.btn-primary {
+  display: block;
+  width: 237px;
+  height: 62px;
+  box-sizing: border-box;
+  margin: 20px auto 30px;
+
+  text-align: center;
+  line-height: 62px;
+  font-size: 16px;
+  color: #FFFFFF;
+  text-decoration: none;
+
+  background: #6BA4F7;
+  border: 2px solid #6BA4F7;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background-color: #ffffff;
+  color: #6BA4F7;
 }
 
 @media (max-width: 640px) {
