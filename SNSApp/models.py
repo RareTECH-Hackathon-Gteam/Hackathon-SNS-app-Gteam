@@ -1,8 +1,8 @@
 from flask import abort
 import pymysql
-from util.DB import DB    ###後日DB.pyファイルを作成
+from util.DB import DB
 
-db_pool = DB.init_db_pool()    ###後日DB.pyファイルを作成
+db_pool = DB.init_db_pool()
 
 # Userクラス
 class User:
@@ -55,6 +55,35 @@ class User:
 # Postsクラス
 class Post:
     @classmethod
+    def get_all(cls):
+        conn = db_pool.get_conn()
+        try:
+            with conn.cursor() as cur:
+                sql = """
+                        SELECT \
+                            p.id, \
+                            p.contents, \
+                            p.created_at, \
+                            u.name AS user_name, \
+                        COUNT(CASE WHEN r.reaction_id = 1 THEN 1 END) AS good_count, \
+                        COUNT(CASE WHEN r.reaction_id = 2 THEN 1 END) AS study_count \
+                        From posts p \
+                            INNER JOIN users u ON p.user_id = u.id AND u.deleted_at IS NULL\
+                            LEFT JOIN reactions r ON p.id = r.post_id \
+                        WHERE p.deleted_at IS NULL \
+                        GROUP BY p.id, p.contents, p.created_at, u.name \
+                        ORDER BY p.created_at DESC;
+                        """
+                cur.execute(sql)
+                posts = cur.fetchall()
+            return posts
+        except pymysql.Error as e:
+            print(f'エラーが発生しています:{e}')
+            abort(500)
+        finally:
+            db_pool.release(conn)
+
+    @classmethod
     def create(cls, user_id, contents):
         conn = db_pool.get_conn()
         try:
@@ -62,6 +91,36 @@ class Post:
                 sql = "INSERT INTO posts (user_id, contents) VALUES (%s, %s);"
                 cur.execute(sql, (user_id, contents))
                 conn.commit()
+        except pymysql.Error as e:
+            print(f'エラーが発生しています:{e}')
+            abort(500)
+        finally:
+            db_pool.release(conn)
+
+    # マイページの投稿取得
+    @classmethod
+    def get_own_posts(cls, user_id):
+        conn = db_pool.get_conn()
+        try:
+            with conn.cursor() as cur:
+                sql = """
+                        SELECT \
+                            p.id, \
+                            p.contents, \
+                            p.created_at, \
+                            u.name AS user_name, \
+                            COUNT(CASE WHEN r.reaction_id = 1 THEN 1 END) AS good_count, \
+                            COUNT(CASE WHEN r.reaction_id = 2 THEN 1 END) AS study_count \
+                        FROM posts p \
+                        INNER JOIN users u ON p.user_id = u.id AND u.id = %s AND u.deleted_at IS NULL \
+                        LEFT JOIN reactions r ON p.id = r.post_id \
+                        WHERE p.deleted_at IS NULL \
+                        GROUP BY p.id, p.contents, p.created_at, u.name \
+                        ORDER BY p.created_at DESC;
+                        """
+                cur.execute(sql, (user_id,))
+                posts = cur.fetchall()
+            return posts
         except pymysql.Error as e:
             print(f'エラーが発生しています:{e}')
             abort(500)
@@ -97,6 +156,7 @@ class Reaction:
             db_pool.release(conn)
         
     # リアクション数カウント
+    @classmethod
     def count_reaction(cls, post_id, reaction_id):
         conn = db_pool.get_conn()
         try:
