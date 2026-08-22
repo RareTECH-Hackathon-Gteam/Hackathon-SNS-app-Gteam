@@ -42,6 +42,18 @@ CREATE TABLE
         CONSTRAINT fk_posts_user FOREIGN KEY (user_id) REFERENCES users (id)
     ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
 
+CREATE TABLE
+    reaction_mst (
+        id BIGINT UNSIGNED NOT NULL UNIQUE,
+        reaction_name CHAR(50) NOT NULL,
+        PRIMARY KEY (id)
+    ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
+
+INSERT INTO reaction_mst (id, reaction_name)
+VALUES
+    (1, 'good'),
+    (2, 'study');
+
 CREATE TABLE 
     reactions (
         id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -57,18 +69,6 @@ CREATE TABLE
         CONSTRAINT fk_reactions_reaction_mst FOREIGN KEY (reaction_id) REFERENCES reaction_mst (id),
         UNIQUE (user_id, post_id, reaction_id)
     ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
-
-CREATE TABLE
-    reaction_mst (
-        id BIGINT UNSIGNED NOT NULL UNIQUE,
-        reaction_name CHAR(50) NOT NULL,
-        PRIMARY KEY (id)
-    ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
-
-INSERT INTO reaction_mst (id, reaction_name)
-VALUES
-    (1, 'good'),
-    (2, 'study');
 
 INSERT INTO users (name, email, password)
 VALUES 
