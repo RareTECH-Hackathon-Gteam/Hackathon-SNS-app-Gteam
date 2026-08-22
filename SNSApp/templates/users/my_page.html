@@ -14,7 +14,7 @@
   
   <main>
     {% if posts and posts|length > 0 %}
-    <section class="post-list">
+    <section class="post-list app-scroll-area">
       {% for post in posts %}
       <div class="post-card">
         <div class="post-content">
@@ -48,11 +48,6 @@
       <p>投稿がありません。</p>
     </div>
     {% endif %}
-    <div>
-      <button class="btn-primary" type="submit">
-          投稿作成
-      </button>
-    </div>
   </main>
 </div>
 {% endblock %}
