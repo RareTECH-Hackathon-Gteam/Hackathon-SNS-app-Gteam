@@ -97,6 +97,7 @@ def logout():
 # タイムラインの表示
 @app.route('/', methods=['GET'])
 def posts_view():
+    user_id = session.get('user_id')
     posts = Post.get_all()
     for post in posts:
         post['created_at'] = post['created_at'].strftime('%Y-%m-%d %H:%M')
