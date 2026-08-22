@@ -51,9 +51,9 @@ def signup_process():
         flash('既に登録されているメールアドレスです', 'error')
         return redirect(url_for('signup_view'))
     # passwordのハッシュ化
-    hushed_password = hashlib.sha256(password.encode('utf-8')).hexdigest()
+    hashed_password = hashlib.sha256(password.encode('utf-8')).hexdigest()
     # ユーザー登録処理
-    user_id = User.create(name, email, hushed_password)
+    user_id = User.create(name, email, hashed_password)
     session['user_id'] = user_id
     flash('登録完了！', 'success')
     return redirect(url_for('posts_view'))
@@ -78,8 +78,8 @@ def login_process():
         if user is None:
             flash('メールアドレスまたはパスワードが間違っています', 'error')
         else:
-            hushPassword = hashlib.sha256(password.encode('utf-8')).hexdigest()
-            if hushPassword != user['password']:
+            hashPassword = hashlib.sha256(password.encode('utf-8')).hexdigest()
+            if hashPassword != user['password']:
                 flash('メールアドレスまたはパスワードが間違っています', 'error')
             else:
                 session['user_id'] = user['id']
