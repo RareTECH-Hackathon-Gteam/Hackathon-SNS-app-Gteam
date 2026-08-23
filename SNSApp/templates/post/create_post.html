@@ -3,22 +3,13 @@
 {% block title %}投稿作成 - SNS App{% endblock %}
 {% block page_css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
-<link rel="stylesheet" href="{{ url_for('static', filename='css/posts.css')}}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/create_post.css')}}">
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
 {% endblock %}
 
 {% block content %}
 
-<!-- ヘッダー -->
 <div class="auth-wrapper">
-    <header class="post-header">
-        <div class="header-inner">
-            <a href="{{ url_for('posts_view') }}" class="logo">mana-Link</a>
-            
-            <a href="{{ url_for('posts_view') }}" class="cancel-button">キャンセル</a>
-
-        </div>
-    </header>
-
     <!-- 投稿フォーム -->
     <section class="new-post-container">
         <form class="new-post-form" action="/posts" method="post">
@@ -37,7 +28,10 @@
             {% endif %}
             {% endwith %}
 
-            <textarea name="content" placeholder="今日の勉強を共有しよう！"></textarea>
+            <div class="textarea-wrapper">
+                <textarea id="post-content" name="content" placeholder="今日の勉強を共有しよう！" maxlength="140" required></textarea>
+                <div id="char-count" class="char-count-display">0/140</div>
+            </div>
             <div class="new-post-footer">
                 <button class="btn-primary" type="submit">
                     投稿作成
@@ -45,5 +39,7 @@
             </div>
         </form>
     </section>
- </div>
- {% endblock %}
+</div>
+
+<script src="{{ url_for('static', filename='js/create_post.js') }}"></script>
+{% endblock %}
