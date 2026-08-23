@@ -4,6 +4,7 @@
 {% block page_css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/create_post.css')}}">
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
 {% endblock %}
 
 {% block content %}
@@ -28,7 +29,7 @@
             {% endwith %}
 
             <div class="textarea-wrapper">
-                <textarea id="post-content" name="content" placeholder="今日の勉強を共有しよう！" maxlength="140"></textarea>
+                <textarea id="post-content" name="content" placeholder="今日の勉強を共有しよう！" maxlength="140" required></textarea>
                 <div id="char-count" class="char-count-display">0/140</div>
             </div>
             <div class="new-post-footer">
@@ -38,15 +39,7 @@
             </div>
         </form>
     </section>
- </div>
+</div>
 
- <script>
-    const textarea = document.getElementById('post-content');
-    const charCount = document.getElementById('char-count');
-
-    textarea.addEventListener('input', () => {
-        const currentLength = textarea.value.length;
-        charCount.textContent = `${currentLength}/140`;
-    });
-</script>
+<script src="{{ url_for('static', filename='js/create_post.js') }}"></script>
 {% endblock %}

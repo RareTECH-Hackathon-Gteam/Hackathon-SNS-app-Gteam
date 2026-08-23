@@ -16,10 +16,10 @@
   {% block page_css %}{% endblock %}
 </head>
 <body>
-  {% include 'common/header.html' %}
+  {% if header_type is defined and header_type %}
+    {% include 'common/header.html' %}
+  {% endif %}
 
   {% block content %}{% endblock %}
-
-  {# {% include 'common/footer.html' %} #}
 </body>
 </html>

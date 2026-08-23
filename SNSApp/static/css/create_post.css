@@ -6,15 +6,6 @@
     border-bottom: 1px solid #e0e0e0;
 }
 
-.header-inner {
-    margin: 0 auto;
-    padding: 8px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-sizing: border-box;
-}
-
 .cancel-button {
     color: white;
     background-color: #6BA4F7;

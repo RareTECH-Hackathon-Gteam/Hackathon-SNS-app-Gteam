@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 
+{% block title %}マイページ - SNS App{% endblock %}
 {% block page_css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/my_page.css') }}">
 {% endblock %}
@@ -7,9 +8,8 @@
 {% block content %}
 <div class = "page-my_page">
   <!-- メイン -->
-  <h1>{{ users.name }} のページ</h1>
-    
   <main>
+  <h2>{{ user_name }} のページ</h2>    
     {% if posts and posts|length > 0 %}
     <section class="post-list app-scroll-area">
       {% for post in posts %}
@@ -28,7 +28,7 @@
             </form>
           </div>
           <div class="post-body">
-            {{ post.content }}
+            {{ post.contents }}
           </div>
           <div class="post-footer">
             <div class="post-actions">
