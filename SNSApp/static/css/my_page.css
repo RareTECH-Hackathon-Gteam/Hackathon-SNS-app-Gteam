@@ -120,14 +120,7 @@ main {
   border: 2px solid var(--button-good);
   color: var(--text-main);
   transition: background-color 0.2s, border-color 0.2s;
-}
-
-.post-btn-good:hover {
-  color: var(--button-good);
-  background-color: #ffffff;
-  border: 2px solid var(--button-good);
-  cursor: pointer;
-  transition: all 0.3s ease;
+  cursor: default;
 }
 
 .post-btn-study {
@@ -135,14 +128,7 @@ main {
   border: 2px solid var(--button-study);
   color: var(--text-main);
   transition: background-color 0.2s, border-color 0.2s;
-}
-
-.post-btn-study:hover {
-  color: #C29000;
-  background-color: #ffffff;
-  border: 2px solid var(--button-study);
-  cursor: pointer;
-  transition: all 0.3s ease;
+  cursor: default;
 }
 
 .empty {

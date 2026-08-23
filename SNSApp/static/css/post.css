@@ -118,6 +118,14 @@ main {
   background-clip: padding-box;
 }
 
+.post-btn-good-invalid {
+  background-color: var(--button-good);
+  border: 2px solid var(--button-good);
+  color: var(--text-main);
+  transition: background-color 0.2s, border-color 0.2s;
+  cursor: default;
+}
+
 .post-btn-good {
   background-color: var(--button-good);
   border: 2px solid var(--button-good);
@@ -131,6 +139,14 @@ main {
   border: 2px solid var(--button-good);
   cursor: pointer;
   transition: all 0.3s ease;
+}
+
+.post-btn-study-invalid {
+  background-color: var(--button-study);
+  border: 2px solid var(--button-study);
+  color: var(--text-main);
+  transition: background-color 0.2s, border-color 0.2s;
+  cursor: default;
 }
 
 .post-btn-study {

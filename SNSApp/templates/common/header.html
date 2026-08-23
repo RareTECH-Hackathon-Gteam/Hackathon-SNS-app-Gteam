@@ -1,8 +1,6 @@
 <header>
   <div class="header-inner">
-      {% if header_type is defined and header_type %}
-        <a href="{{ url_for('posts_view') }}" class="logo">mana-Link</a>
-      {% endif %}
+    <a href="{{ url_for('posts_view') }}" class="logo">mana-Link</a>
     <div class="header-nav">
       {% if header_type == 'logout' %}
         <form class="header-button" action="{{ url_for('logout') }}" method="POST">
@@ -15,9 +13,9 @@
         <a class="header-button" href="{{ url_for('posts_view') }}">キャンセル</a>
       {% elif header_type == 'mypage' %}
         <a class="header-button" href="{{ url_for('posts_view') }}">タイムライン</a>
-        <form class="header-button" action="{{ url_for('logout') }}" method="POST">
+        <form action="{{ url_for('logout') }}" method="POST">
           <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-          <button type="submit">ログアウト</button>
+          <button class="header-button" type="submit">ログアウト</button>
         </form>  
       {% elif header_type == 'timeline' %}
         {% if user_id %}

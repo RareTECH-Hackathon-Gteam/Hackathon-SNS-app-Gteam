@@ -34,7 +34,7 @@
                   </button>
                 </form>
               {% else %}
-                <button class="post-btn post-btn-good" disabled title="ログインすると押せます">
+                <button class="post-btn post-btn-good-invalid" disabled title="ログインすると押せます">
                   いいね 👍 <span class="count">{{ post.good_count }}</span>
                 </button>
               {% endif %}
@@ -47,7 +47,7 @@
                   </button>
                 </form>
               {% else %}
-                <button class="post-btn post-btn-study" disabled title="ログインすると押せます">
+                <button class="post-btn post-btn-study-invalid" disabled title="ログインすると押せます">
                   便乗！📖 <span class="count">{{ post.study_count }}</span>
                 </button>
               {% endif %}
