@@ -125,7 +125,7 @@ def create_post():
         return redirect(url_for('login_view'))
     contents = request.form.get('content', '').strip()
     if contents == '':
-        flash ('投稿内容が空です', 'error')
+        flash('投稿内容が空です', 'error')
         return redirect(url_for('create_post_page'))
     if len(contents) > 140:
         flash('140文字以内で入力してください', 'error')
