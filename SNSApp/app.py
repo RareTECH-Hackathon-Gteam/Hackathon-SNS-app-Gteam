@@ -1,5 +1,6 @@
 from flask import Flask, request, session, redirect, url_for, jsonify, flash, render_template
 from flask_wtf.csrf import CSRFProtect
+from datetime import timedelta
 import os
 import re
 import hashlib
@@ -16,6 +17,11 @@ REACTION_NAME_DIC = {
 
 app = Flask(__name__)
 app.secret_key = os.environ['SECRET_KEY']
+app.permanent_session_lifetime = timedelta(days=30)
+
+@app.before_request
+def make_session_permanent():
+    session.permanent = True
 
 csrf = CSRFProtect(app)
 
@@ -103,11 +109,15 @@ def posts_view():
         post['created_at'] = post['created_at'].strftime('%Y-%m-%d %H:%M')
     return render_template('post/post.html', posts=posts, user_id=user_id, header_type = 'timeline')
 
-# 投稿処理
+# 投稿画面の表示
 @app.route('/posts', methods=['GET'])
 def create_post_page():
+    user_id = session.get('user_id')
+    if user_id is None:
+        return redirect(url_for('login_view'))
     return render_template('post/create_post.html', header_type = 'cancel')
 
+# 投稿処理
 @app.route('/posts', methods=['POST'])
 def create_post():
     user_id = session.get('user_id')
@@ -115,11 +125,14 @@ def create_post():
         return redirect(url_for('login_view'))
     contents = request.form.get('content', '').strip()
     if contents == '':
-        flash ('投稿内容が空です', 'error')
-        return redirect(url_for('posts_view'))    ###posts_view(タイムラインの表示)を後日作成
+        flash('投稿内容が空です', 'error')
+        return redirect(url_for('create_post_page'))
+    if len(contents) > 140:
+        flash('140文字以内で入力してください', 'error')
+        return redirect(url_for('create_post_page'))
     Post.create(user_id, contents)
     flash('投稿完了！', 'success')
-    return redirect(url_for('posts_view'))    ###posts_view(タイムラインの表示)を後日作成
+    return redirect(url_for('posts_view'))
 
 # リアクションの処理（URLのリアクション名の部分も変数として受け取る）
 @app.route('/posts/<int:post_id>/<string:reaction_name>', methods=['POST'])
@@ -145,6 +158,19 @@ def my_page_view(user_id):
     for post in posts:
         post['created_at'] = post['created_at'].strftime('%Y-%m-%d %H:%M')
     return render_template('users/my_page.html', user_name=user_name, posts=posts, header_type = 'mypage')
+
+@app.errorhandler(400)
+def bad_request(error):
+    return render_template('error/400.html'), 400
+
+@app.errorhandler(404)
+def page_not_found(error):
+    return render_template('error/404.html'), 404
+
+@app.errorhandler(500)
+def internal_server_error(error):
+    return render_template('error/500.html'), 500
+
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", debug=True)    ###debug=Trueは後で変更？
