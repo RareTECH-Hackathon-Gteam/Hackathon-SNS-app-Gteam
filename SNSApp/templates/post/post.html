@@ -9,6 +9,18 @@
 <div class = "page-post">
   <!-- メイン -->
   <main>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="flash-messages">
+          {% for category, message in messages %}
+            <div class="flash flash-{{ category }}">
+              {{ message }}
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
     {% if posts and posts|length > 0 %}
     <section class="post-list app-scroll-area">
       {% for post in posts %}
@@ -62,7 +74,7 @@
       <p>投稿がありません。</p>
     </div>
     {% endif %}
-    <div>
+    <div class="post-create-area">
       {% if user_id %}
         <a class="btn-primary" href="{{ url_for('create_post') }}">投稿作成</a>
       {% endif %}
