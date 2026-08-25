@@ -14,6 +14,11 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/color.css') }}">
   {% block page_css %}{% endblock %}
+
+  <script
+    defer
+    src="{{ url_for('static', filename='js/flash.js') }}">
+  </script>
 </head>
 <body>
   {% if header_type is defined and header_type %}
