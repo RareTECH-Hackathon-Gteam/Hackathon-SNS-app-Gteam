@@ -16,16 +16,10 @@
       <div class="post-card">
         <div class="post-content">
           <div class="post-header">
-            <div class="post-info">
-              <div class="post-user">
-                <span class="display-name">{{ post.user_name }}</span>
-              </div>
-              <div class="post-time">{{ post.created_at }}</div>
+            <div class="post-user">
+              <span class="display-name">{{ post.user_name }}</span>
             </div>
-            <!-- 削除ボタン -->
-            <form action="{{ url_for('delete_post', post_id=post.id) }}" method="POST" onsubmit="return confirm('本当に消していいですか？');">
-              <button class="btn-delete" type="button">🗑️</button>
-            </form>
+            <div class="post-time">{{ post.created_at }}</div>
           </div>
           <div class="post-body">
             {{ post.contents }}

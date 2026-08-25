@@ -2,12 +2,18 @@
   --shadow-soft: 0 12px 30px rgba(15, 23, 42, 0.06);
 }
 
+.page-post {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+
+}
+
 main {
+  width: 100%;
   margin: 0 auto;
-  padding: 24px 16px 48px;
-  height: 800px; 
-  /* 中身が指定の高さを超えたら縦スクロールを表示 */
-  overflow-y: auto;  gap: 8px;
+  padding: 24px 16px 16px;
+  gap: 8px;
 }
 
 .page-title {
@@ -27,9 +33,13 @@ main {
 .post-list {
   display: flex;
   flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
 }
 
 .post-card {
+  flex-shrink: 0;;
   background: var(--card-bg);
   border-radius: 18px;
   max-width: 340px;
@@ -180,7 +190,7 @@ main {
   width: 237px;
   height: 62px;
   box-sizing: border-box;
-  margin: 20px auto 30px;
+  margin: 12px auto 0;
 
   text-align: center;
   line-height: 62px;
@@ -198,6 +208,11 @@ main {
 .btn-primary:hover {
   background-color: #ffffff;
   color: #6BA4F7;
+}
+
+.post-create-area {
+  flex-shrink: 0;
+  margin-top: auto;
 }
 
 @media (max-width: 640px) {

@@ -13,8 +13,9 @@ body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   background: radial-gradient(circle at top left, #e0f2fe 0, #f4f7fb 40%, #f4f7fb 100%);
   color: var(--text-main);
+  width: 100%;
   max-width: 440px;
-  height: 890px;
+  height: min(890px, 100dvh);
   overflow: hidden;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   display: flex;
@@ -50,10 +51,6 @@ main {
   text-decoration: none;
   font-size: 18px;
   color: var(--text-sub);
-}
-
-main {
-  min-height: 100vh;
 }
 
 header{
