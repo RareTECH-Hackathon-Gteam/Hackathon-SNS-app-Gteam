@@ -62,6 +62,7 @@ class Post:
                 sql = """
                         SELECT \
                             p.id, \
+                            p.user_id, \
                             p.contents, \
                             p.created_at, \
                             u.name AS user_name, \
