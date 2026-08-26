@@ -155,21 +155,3 @@ class Reaction:
             abort(500)
         finally:
             db_pool.release(conn)
-        
-    # リアクション数カウント
-    @classmethod
-    def count_reaction(cls, post_id, reaction_id):
-        conn = db_pool.get_conn()
-        try:
-            with conn.cursor() as cur:
-                sql = "SELECT COUNT(*) FROM reactions WHERE post_id = %s AND reaction_id = %s;"
-                cur.execute(sql, (post_id, reaction_id))
-                result = cur.fetchone()
-                # カウント結果がタプルで返ってくるので、その要素を取り出して変数に格納
-                reaction_count = result[0]  
-            return reaction_count
-        except pymysql.Error as e:
-            print(f'エラーが発生しています：{e}')
-            abort(500)
-        finally:
-            db_pool.release(conn)
