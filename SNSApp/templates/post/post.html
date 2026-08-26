@@ -9,6 +9,18 @@
 <div class = "page-post">
   <!-- メイン -->
   <main>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="flash-messages">
+          {% for category, message in messages %}
+            <div class="flash flash-{{ category }}">
+              {{ message }}
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
     {% if posts and posts|length > 0 %}
     <section class="post-list app-scroll-area">
       {% for post in posts %}
@@ -23,10 +35,10 @@
           <div class="post-body">
             {{ post.contents }}
           </div>
-          <div class="post-footer">
+            <div class="post-footer">
             <div class="post-actions">
               <!-- いいね（Good）ボタン -->
-              {% if user_id %}
+              {% if user_id and user_id != post.user_id %}
                 <form action="/posts/{{ post.id }}/good" method="post" style="display: inline;">
                   <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                   <button class="post-btn post-btn-good" type="submit">
@@ -39,7 +51,7 @@
                 </button>
               {% endif %}
               <!-- 便乗（Study）ボタン -->
-              {% if user_id %}
+              {% if user_id and user_id != post.user_id %}
                 <form action="/posts/{{ post.id }}/study" method="post" style="display: inline;">
                   <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                   <button class="post-btn post-btn-study" type="submit">
@@ -62,7 +74,7 @@
       <p>投稿がありません。</p>
     </div>
     {% endif %}
-    <div>
+    <div class="post-create-area">
       {% if user_id %}
         <a class="btn-primary" href="{{ url_for('create_post') }}">投稿作成</a>
       {% endif %}
