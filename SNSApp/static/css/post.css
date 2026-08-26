@@ -39,7 +39,7 @@ main {
 }
 
 .post-card {
-  flex-shrink: 0;;
+  flex-shrink: 0;
   background: var(--card-bg);
   border-radius: 18px;
   max-width: 340px;
