@@ -98,7 +98,7 @@ def login_process():
 def logout():
     session.clear()
     flash('ログアウトしました', 'success')
-    return redirect(url_for('login_view'))
+    return redirect(url_for('posts_view'))
 
 # タイムラインの表示
 @app.route('/', methods=['GET'])
