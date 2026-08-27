@@ -133,7 +133,7 @@ class Post:
         conn = db_pool.get_conn()
         try:
             with conn.cursor() as cur:
-                sql = "UPDATE posts SET deleted_at = NOW() WHERE id = %s:"
+                sql = "UPDATE posts SET deleted_at = NOW() WHERE id = %s;"
                 cur.execute(sql, (post_id,))
                 conn.commit()
         except pymysql.Error as e:

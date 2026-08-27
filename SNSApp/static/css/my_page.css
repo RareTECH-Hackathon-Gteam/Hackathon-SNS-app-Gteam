@@ -75,6 +75,20 @@ main {
   white-space: nowrap;
 }
 
+.post-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-delete {
+  padding: 4px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 18px;
+}
+
 .post-body {
   font-size: 16px;
   color: #111827;

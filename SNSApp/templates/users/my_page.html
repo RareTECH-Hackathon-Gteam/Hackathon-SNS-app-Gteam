@@ -20,6 +20,11 @@
               <span class="display-name">{{ post.user_name }}</span>
             </div>
             <div class="post-time">{{ post.created_at }}</div>
+            <!-- 削除ボタン -->
+            <form action="{{ url_for('delete_post', post_id=post.id) }}" method="POST" onsubmit="return confirm('本当に消していいですか？');">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <button class="btn-delete" type="submit">🗑️</button>
+            </form>
           </div>
           <div class="post-body">
             {{ post.contents }}

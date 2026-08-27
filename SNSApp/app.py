@@ -149,7 +149,7 @@ def delete_post(post_id):
 
     Post.delete(post_id)
     flash('投稿が削除されました', 'success')
-    return redirect(url_for('my_page_view'))
+    return redirect(url_for('my_page_view', user_id=user_id))
 
 # リアクションの処理（URLのリアクション名の部分も変数として受け取る）
 @app.route('/posts/<int:post_id>/<string:reaction_name>', methods=['POST'])
