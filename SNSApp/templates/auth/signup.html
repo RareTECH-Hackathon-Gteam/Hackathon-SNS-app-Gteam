@@ -38,14 +38,20 @@
                 <input type="email" autocomplete="email" name="email" />
             </div>
 
-            <div class="form-group">
+            <div class="form-group password">
                 <label class="form-label">パスワード</label>
-                <input type="password" autocomplete="new-password" name="password" />
+                <input type="password" id="passwordInput" autocomplete="new-password" name="password" />
+                <button type="button" onclick="togglePassword('passwordInput','eyeIcon')" class="toggle-btn">
+                    <i id="eyeIcon" class="fa-solid fa-eye"></i>
+                </button>
             </div>
 
-            <div class="form-group">
+            <div class="form-group password">
                 <label class="form-label">再パスワード</label>
-                <input type="password" autocomplete="new-password" name="password_confirmation" />
+                <input type="password" id="passwordConfirmInput" autocomplete="new-password" name="password_confirmation" />
+                <button type="button" onclick="togglePassword('passwordConfirmInput','eyeIconConfirm')" class="toggle-btn">
+                    <i id="eyeIconConfirm" class="fa-solid fa-eye"></i>
+                </button>
             </div>
 
             <div class="auth-button-container">
