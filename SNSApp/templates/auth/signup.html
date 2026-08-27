@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}新規登録 - SNS App{% endblock %}
+{% block page_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<main>
+    <div class="page-auth">
+        <h1>新規登録</h1>
+        <h2>プロフィールを入力しましょう</h2>
+
+        <!-- エラーメッセージ表示 -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <div class="flash-messages">
+            {% for category, message in messages %}
+            <div class="flash flash-{{ category }}">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% endwith %}
+
+        <form class="auth-form" method="post">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            
+            <div class="form-group">
+                <label class="form-label">ユーザー名</label>
+                <input type="text" autocomplete="username" name="name" /> 
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">メールアドレス</label>
+                <input type="email" autocomplete="email" name="email" />
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">パスワード</label>
+                <input type="password" autocomplete="new-password" name="password" />
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">再パスワード</label>
+                <input type="password" autocomplete="new-password" name="password_confirmation" />
+            </div>
+
+            <div class="auth-button-container">
+                <button class="auth-button" type="submit">登録</button>
+                
+                <a class="switch-auth-mode" href="{{ url_for('login_view') }}">
+                    ログインはこちら
+                </a>
+            </div>
+        </form>
+    </div>
+</main>
+{% endblock %}

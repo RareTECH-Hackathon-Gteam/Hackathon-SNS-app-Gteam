@@ -1,0 +1,29 @@
+<header>
+  <div class="header-inner">
+    <a href="{{ url_for('posts_view') }}" class="logo">mana-Link</a>
+    <div class="header-nav">
+      {% if header_type == 'logout' %}
+        <form class="header-button" action="{{ url_for('logout') }}" method="POST">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+          <button type="submit">ログアウト</button>
+        </form>  
+      {% elif header_type == 'login' %}
+        <a class="header-button" href="{{ url_for('login_view') }}">ログイン</a>
+      {% elif header_type == 'cancel' %}
+        <a class="header-button" href="{{ url_for('posts_view') }}">キャンセル</a>
+      {% elif header_type == 'mypage' %}
+        <a class="header-button" href="{{ url_for('posts_view') }}">タイムライン</a>
+        <form action="{{ url_for('logout') }}" method="POST">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+          <button class="header-button" type="submit">ログアウト</button>
+        </form>  
+      {% elif header_type == 'timeline' %}
+        {% if user_id %}
+          <a class="header-button" href="{{ url_for('my_page_view', user_id=user_id) }}">マイページ</a>
+        {% else %}
+          <a class="header-button" href="{{ url_for('login_view') }}">ログイン</a>
+        {% endif %}
+      {% endif %}
+    </div>
+  </div>
+</header>

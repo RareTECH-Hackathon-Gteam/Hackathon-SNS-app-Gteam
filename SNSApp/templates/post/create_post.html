@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}投稿作成 - SNS App{% endblock %}
+{% block page_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/create_post.css')}}">
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+{% endblock %}
+
+{% block content %}
+
+<div class="auth-wrapper">
+    <!-- 投稿フォーム -->
+    <section class="new-post-container">
+        <form class="new-post-form" action="/posts" method="post">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+            <!-- エラーメッセージ表示 -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            <div class="flash-messages">
+                {% for category, message in messages %}
+                <div class="flash flash-{{ category }}">
+                    {{ message }}
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+            {% endwith %}
+
+            <div class="textarea-wrapper">
+                <textarea id="post-content" name="content" placeholder="今日の勉強を共有しよう！" maxlength="140" required></textarea>
+                <div id="char-count" class="char-count-display">0/140</div>
+            </div>
+            <div class="new-post-footer">
+                <button class="btn-primary" type="submit">
+                    投稿作成
+                </button>
+            </div>
+        </form>
+    </section>
+</div>
+
+<script src="{{ url_for('static', filename='js/create_post.js') }}"></script>
+{% endblock %}

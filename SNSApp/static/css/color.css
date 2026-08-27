@@ -1,0 +1,14 @@
+:root {
+  --bg: #f5f5f7;
+  --card-bg: #ffffff;
+  --accent: #2563eb;
+  --accent-soft: rgba(37, 99, 235, 0.08);
+  --text-main: #111827;
+  --text-sub: #6b7280;
+  --border-soft: #e5e7eb;
+  --danger: #ef4444;
+  --radius-lg: 16px;
+  --button-base:#6ba4f7;
+  --button-good:rgba(107, 164, 247, 0.4);
+  --button-study:rgba(255, 216, 112, 0.4);
+}

@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}ログイン - SNS App{% endblock %}
+{% block page_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
+{% endblock %}
+
+{% block content %}
+<main>
+    <div class="auth-wrapper">
+        <!-- アイコン画像 -->
+        <img src="{{ url_for('static', filename='images/manaLinkIcon.png') }}" alt="mana-Linkアイコン画像" class="auth-logo">
+        
+        <h1>mana-Link</h1>
+        <h2>一言だから、続けられる</h2>
+
+        <form class="auth-form" method="post">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            
+            <!-- エラーメッセージ表示 -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            <div class="flash-messages">
+                {% for category, message in messages %}
+                <div class="flash flash-{{ category }}">
+                    {{ message }}
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+            {% endwith %}
+
+            <div class="form-group">
+                <label>メールアドレス</label>
+                <input type="email" autocomplete="username" name="email" />
+            </div>
+
+
+            <div class="form-group">
+                <label>パスワード</label>
+                <input type="password" autocomplete="current-password" name="password" />
+            </div>
+            <div class="auth-button-container">
+                <button class="auth-button" type="submit">ログイン</button>
+                
+                <a class="switch-auth-mode" href="{{ url_for('signup_view') }}">
+                    新規登録はこちら
+                </a>
+            </div>
+        </form>
+    </div>
+</main>
+
+{% endblock %}
