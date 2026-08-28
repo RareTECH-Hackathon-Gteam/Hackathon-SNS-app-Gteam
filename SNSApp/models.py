@@ -128,6 +128,35 @@ class Post:
         finally:
             db_pool.release(conn)
 
+    @classmethod
+    def delete(cls, post_id):
+        conn = db_pool.get_conn()
+        try:
+            with conn.cursor() as cur:
+                sql = "UPDATE posts SET deleted_at = NOW() WHERE id = %s;"
+                cur.execute(sql, (post_id,))
+                conn.commit()
+        except pymysql.Error as e:
+            print(f'エラーが発生しています：{e}')
+            abort(500)
+        finally:
+            db_pool.release(conn)
+
+    @classmethod
+    def find_by_id(cls, post_id):
+        conn = db_pool.get_conn()
+        try:
+            with conn.cursor() as cur:
+                sql = "SELECT * FROM posts WHERE id = %s AND deleted_at IS NULL;"
+                cur.execute(sql, (post_id,)) 
+                post = cur.fetchone()
+            return post
+        except pymysql.Error as e:
+            print(f'エラーが発生しています：{e}')
+            abort(500)
+        finally:
+            db_pool.release(conn)
+
 #Reactionクラス
 class Reaction:
     @classmethod

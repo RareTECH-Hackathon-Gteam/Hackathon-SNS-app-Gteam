@@ -75,6 +75,94 @@ main {
   white-space: nowrap;
 }
 
+.post-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-delete {
+  padding: 4px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+/* 通常時は非表示 */
+.delete-confirm {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+
+  background-color: rgba(17, 24, 39, 0.35);
+
+  align-items: center;
+  justify-content: center;
+}
+
+/* 削除ボタンを押したときに表示 */
+.delete-confirm.is-open {
+  display: flex;
+}
+
+.delete-confirm-dialog {
+  width: min(320px, calc(100% - 40px));
+  padding: 24px;
+  background-color: var(--card-bg);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.18);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.delete-confirm p {
+  margin: 0;
+  font-weight: 400;
+  color: var(--text-main);
+  font-size: 15px;
+}
+
+.delete-confirm-buttons {
+  display: flex;
+  gap: 12px;
+}
+
+.btn-delete-yes,
+.btn-delete-no {
+  padding: 8px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.btn-delete-yes {
+  color: #ffffff;
+  background-color: #ef6b6b;
+  border: 1px solid #ef6b6b;
+  transition: background-color 0.2s,
+  border-color 0.2s;
+}
+
+.btn-delete-yes:hover {
+  background-color: #dc4f4f;
+  border-color: #dc4f4f;
+}
+
+.btn-delete-no {
+  color: var(--text-sub);
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-soft);
+  transition: background-color 0.2s;
+}
+
+.btn-delete-no:hover {
+  background-color: var(--bg);
+}
+
 .post-body {
   font-size: 16px;
   color: #111827;
