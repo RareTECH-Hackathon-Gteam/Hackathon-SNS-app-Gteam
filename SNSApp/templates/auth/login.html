@@ -36,15 +36,21 @@
             </div>
 
 
-            <div class="form-group">
+            <div class="form-group password"> 
                 <label>パスワード</label>
-                <input type="password" autocomplete="current-password" name="password" />
+                <input type="password" id="passwordInput" autocomplete="current-password" name="password" />
+                <button type="button" onclick="togglePassword()" class="toggle-btn">
+                    <i id="eyeIcon" class="fa-solid fa-eye"></i>
+                </button>
             </div>
             <div class="auth-button-container">
                 <button class="auth-button" type="submit">ログイン</button>
                 
                 <a class="switch-auth-mode" href="{{ url_for('signup_view') }}">
                     新規登録はこちら
+                </a>
+                <a class="switch-auth-mode" href="{{ url_for('posts_view') }}">
+                    戻る
                 </a>
             </div>
         </form>
