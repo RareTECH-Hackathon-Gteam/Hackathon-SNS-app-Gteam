@@ -167,6 +167,8 @@ def react_to_post(post_id, reaction_name):
 # マイページ表示
 @app.route('/my_page/<int:user_id>', methods=['GET'])
 def my_page_view(user_id):
+    if session.get('user_id') != user_id:
+        return redirect(url_for('posts_view'))
     user_name = User.get_name_by_id(user_id)
     if user_name is None:
         return redirect(url_for('login_view'))
