@@ -144,7 +144,7 @@ main {
   background-color: #ef6b6b;
   border: 1px solid #ef6b6b;
   transition: background-color 0.2s,
-  border-color 0.2s
+  border-color 0.2s;
 }
 
 .btn-delete-yes:hover {
