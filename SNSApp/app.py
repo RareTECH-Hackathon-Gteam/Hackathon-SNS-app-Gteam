@@ -1,4 +1,4 @@
-from flask import Flask, request, session, redirect, url_for, jsonify, flash, render_template
+from flask import Flask, request, session, redirect, url_for, jsonify, flash, render_template, abort
 from flask_wtf.csrf import CSRFProtect
 from datetime import timedelta
 import os
@@ -134,6 +134,23 @@ def create_post():
     flash('投稿完了！', 'success')
     return redirect(url_for('posts_view'))
 
+# 投稿削除機能
+@app.route('/posts/<int:post_id>/delete', methods=['POST'])
+def delete_post(post_id):
+    user_id = session.get('user_id')
+    if user_id is None:
+        return redirect(url_for('login_view'))
+    post = Post.find_by_id(post_id)
+    if post is None:
+        abort(404)
+    if post['user_id'] != user_id:
+        flash('この投稿を削除することはできません', 'error')
+        return redirect(url_for('posts_view')) 
+
+    Post.delete(post_id)
+    flash('投稿が削除されました', 'success')
+    return redirect(url_for('my_page_view', user_id=user_id))
+
 # リアクションの処理（URLのリアクション名の部分も変数として受け取る）
 @app.route('/posts/<int:post_id>/<string:reaction_name>', methods=['POST'])
 def react_to_post(post_id, reaction_name):
@@ -150,6 +167,9 @@ def react_to_post(post_id, reaction_name):
 # マイページ表示
 @app.route('/my_page/<int:user_id>', methods=['GET'])
 def my_page_view(user_id):
+    if session.get('user_id') != user_id:
+        flash('他のユーザーのマイページにアクセスすることはできません', 'error')
+        return redirect(url_for('posts_view'))
     user_name = User.get_name_by_id(user_id)
     if user_name is None:
         return redirect(url_for('login_view'))

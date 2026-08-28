@@ -55,7 +55,9 @@ a {
 .form-group {
     display: flex;
     flex-direction: column;
+    align-items: center;
     color: #666666;
+    margin-bottom: 15px;
 }
 
 label, .form-group {
@@ -144,6 +146,41 @@ button {
     opacity: 0.6;
 }
 
+.form-group.password {
+    position: relative;
+    max-width: 237px; /* inputと同じ幅を固定指定 */
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.form-group.password input[type="password"],
+.form-group.password input[type="text"] {
+    width: 100%;
+    max-width: 100%;
+    padding-right: 45px; /* 右側にアイコン表示領域を確保 */
+}
+
+.toggle-btn {
+    position: absolute;
+    right: 15px;
+    bottom: 14px; /* inputの下端から固定位置で配置 */
+    width: auto;
+    max-width: none;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.toggle-btn:hover {
+    background: transparent;
+    border: none;
+}
+
 /* === signup.html === */
 
 .page-auth {
@@ -172,4 +209,34 @@ button {
     margin: 0 auto;
     padding-left: 10px;
     padding-bottom: 3px;
+}
+
+.password{
+  position: relative;
+  display: inline-block;
+}
+
+.toggle-btn {
+    position: absolute;
+    right: 15px;
+    top: calc(50% + 10px); /* labelの分の位置ずれを調整 */
+    transform: translateY(-50%);
+    width: auto;           /* 幅100%を解除 */
+    max-width: none;
+    padding: 0;            /* パディングを解除 */
+    margin: 0;             /* margin-top: 16px を解除 */
+    background: transparent; /* 背景色を透明に */
+    border: none;
+    color: #666;
+    cursor: pointer;
+}
+
+.toggle-btn:hover {
+    background: transparent; /* hover時のスタイルも打ち消し */
+    border: none;
+}
+
+.password input[type="password"],
+.password input[type="text"] {
+    padding-right: 45px;
 }

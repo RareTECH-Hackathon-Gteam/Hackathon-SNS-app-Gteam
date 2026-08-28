@@ -4,12 +4,31 @@
 {% block page_css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/my_page.css') }}">
 {% endblock %}
+{% block page_js %}
+<script
+  defer
+  src="{{ url_for('static', filename='js/my_page.js')}}">
+</script>
+{% endblock %}
 
 {% block content %}
 <div class = "page-my_page">
   <!-- メイン -->
   <main>
-  <h2>{{ user_name }} のページ</h2>    
+    <h2>{{ user_name }} のページ</h2> 
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="flash-messages">
+          {% for category, message in messages %}
+            <div class="flash flash-{{ category }}">
+              {{ message }}
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
     {% if posts and posts|length > 0 %}
     <section class="post-list app-scroll-area">
       {% for post in posts %}
@@ -19,7 +38,41 @@
             <div class="post-user">
               <span class="display-name">{{ post.user_name }}</span>
             </div>
-            <div class="post-time">{{ post.created_at }}</div>
+            <div class="post-header-actions">
+              <div class="post-time">{{ post.created_at }}</div>
+              <!-- 削除ボタン -->
+              <form
+                class="delete-form"
+                action="{{ url_for('delete_post', post_id=post.id) }}"
+                method="POST">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <button class="btn-delete"
+                  type="button"
+                  onclick="openDeleteConfirm(this)"
+                  >
+                    🗑️
+                  </button>
+                
+                <!-- 投稿カードに重ねる確認画面 -->
+                <div class="delete-confirm">
+                  <div class="delete-confirm-dialog">
+                    <p>本当に消していいですか？</p>
+
+                    <div class="delete-confirm-buttons">
+                      <button class="btn-delete-yes" type="submit">はい</button>
+
+                      <button
+                        class="btn-delete-no"
+                        type="button"
+                        onclick="closeDeleteConfirm(this)"
+                      >
+                        いいえ
+                    </button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
           </div>
           <div class="post-body">
             {{ post.contents }}
