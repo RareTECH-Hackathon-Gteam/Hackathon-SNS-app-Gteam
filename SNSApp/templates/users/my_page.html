@@ -15,7 +15,20 @@
 <div class = "page-my_page">
   <!-- メイン -->
   <main>
-  <h2>{{ user_name }} のページ</h2>    
+    <h2>{{ user_name }} のページ</h2> 
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="flash-messages">
+          {% for category, message in messages %}
+            <div class="flash flash-{{ category }}">
+              {{ message }}
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
     {% if posts and posts|length > 0 %}
     <section class="post-list app-scroll-area">
       {% for post in posts %}
